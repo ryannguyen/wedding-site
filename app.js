@@ -12,7 +12,7 @@ var express = require('express')
 
 // Connect to DB
 var connection = mongoose.connection;
-var connection_string = 'mongodb://ryan:password@localhost:27017/rsvp';
+var connection_string = process.env.MONGOLAB_URI || 'mongodb://ryan:password@localhost:27017/rsvp';
 
 mongoose.connect(connection_string);
 
