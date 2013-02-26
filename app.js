@@ -44,6 +44,9 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+app.all('/admin/*', express.basicAuth('ryanandlisa', 'whitecollar'));
+
+
 // GET INVITATIONS
 app.get('/api/invitations', function(req, res) {
   Invitation

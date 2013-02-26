@@ -5,6 +5,10 @@ $(function() {
     var _events = _.extend({}, Backbone.Events);
 
     var Invitation = Backbone.Model.extend({
+        defaults: {
+            address: '',
+            side: ''
+        },
         initialize: function(attr, options) {
             attr = attr || {};
             this.people = new People;
@@ -165,7 +169,7 @@ $(function() {
                 return;
             }
 
-            this.model.set({ label: label, side: side,});
+            this.model.set({ label: label, side: side, address:address});
             this.collection.create(this.model.prep().attributes, {
                 success: function() {
                     _events.trigger('showInvitations');

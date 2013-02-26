@@ -43,9 +43,9 @@
 
         <script type="text/template" id="invitation-table-row-template">
             <td><%= label %></td>
-            <td><%= address.replace(/\r|\n/gi, ', ') %></td>
+            <td><%= address ? address.replace(/\r|\n/gi, ', ') : '' %></td>
             <td><%= people.length %></td>
-            <td><%= side.substr(0,1).toUpperCase() %></td>
+            <td><%= side ? side.substr(0,1).toUpperCase() : '' %></td>
             <td><%= password %></td>
         </script>
 
