@@ -30,6 +30,9 @@
                 <thead>
                     <tr>
                         <th>Invitation</th>
+                        <th>Address</th>
+                        <th># Guests</th>
+                        <th>Side</th>
                         <th>Password</th>
                     </tr>
                 <tbody>
@@ -40,6 +43,9 @@
 
         <script type="text/template" id="invitation-table-row-template">
             <td><%= label %></td>
+            <td><%= address.replace(/\r|\n/gi, ', ') %></td>
+            <td><%= people.length %></td>
+            <td><%= side.substr(0,1).toUpperCase() %></td>
             <td><%= password %></td>
         </script>
 
@@ -47,10 +53,23 @@
             <div class="span12">
                 <fieldset>
                     <legend>Invitation Details</legend>
+                    <br />
                     <label>Invitation Label</label>
                     <input id="invitation-label" type="text" placeholder="Serenity Crew">
 
+                    <label>Address</label>
+                    <textarea rows="4" class='input-xlarge' id="invitation-address"></textarea>
+
+                    <label>Guests Of</label>
+                    <select id="invitation-side" class="span1">
+                        <option value="lisa">Lisa</option>
+                        <option value="ryan">Ryan</option>
+                    </select>
+
+                    <br />
+                    <br />
                     <legend>Add Invitees</legend>
+                    <br />
 
                     <div class="controls-row">
                         <input class="span3" id="invitee-name" type="text" placeholder="Malcolm Reynolds">

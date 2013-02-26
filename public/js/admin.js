@@ -151,6 +151,8 @@ $(function() {
         },
         save: function() {
             var label = this.$('#invitation-label').val();
+            var side = this.$('#invitation-side').val();
+            var address = this.$('#invitation-address').val();
             var _this = this;
 
             if(!label) {
@@ -158,7 +160,7 @@ $(function() {
                 return;
             }
 
-            this.model.set('label', label);
+            this.model.set({ label: label, side: side, address:address});
             this.collection.create(this.model.prep().attributes, {
                 success: function() {
                     _this.model.clear();

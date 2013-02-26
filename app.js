@@ -17,9 +17,11 @@ var connection_string = process.env.MONGOLAB_URI || 'mongodb://ryan:password@loc
 mongoose.connect(connection_string);
 
 var invitationSchema = new mongoose.Schema({
+  address: String,
   label: String,
   password: String,
   people: Array,
+  side: String
 });
 var Invitation = connection.model('Invitation', invitationSchema);
 
