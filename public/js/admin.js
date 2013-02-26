@@ -37,7 +37,12 @@ $(function() {
         prep: function() {
             this._setPeople()._generatePassword();
             return this;
+        },
+        clear: function() {
+            Backbone.Model.prototype.clear.apply(this, arguments);
+            this.people.reset(null);
         }
+
     });
 
     var Person = Backbone.Model.extend({});
@@ -123,6 +128,7 @@ $(function() {
             return this;
         },
         hide: function() {
+            this.model.clear();
             this.$el.hide();
         },
         show: function() {
@@ -146,7 +152,6 @@ $(function() {
             $type.val('adult');
         },
         cancel: function() {
-            this.model.clear();
             _events.trigger('showInvitations');
         },
         save: function() {
@@ -160,10 +165,9 @@ $(function() {
                 return;
             }
 
-            this.model.set({ label: label, side: side, address:address});
+            this.model.set({ label: label, side: side,});
             this.collection.create(this.model.prep().attributes, {
                 success: function() {
-                    _this.model.clear();
                     _events.trigger('showInvitations');
                 }
             });
