@@ -25,6 +25,15 @@
         <div id="app" class="container"></div>
 
         <script type="text/template"  id="invitations-template">
+
+            <br />
+            <div class="span12">
+                <strong>Adult Count:</strong> <span class="adultCount"><%= adultCount %></span><br />
+                <strong>Children Count:</strong> <span class="childCount"><%= childCount %></span><br />
+                <strong>Toddler Count:</strong> <span class="toddlerCount"><%= toddlerCount %></span><br />
+                <strong>Infant Count:</strong> <span class="infantCount"><%= infantCount %></span><br />
+            </div>
+
             <div class="span12">
                 <table class="table">
                 <thead>
@@ -76,7 +85,7 @@
                         <select class="span2" id="invitee-type">
                             <option value="adult">Adult</option>
                             <option value="child">Child</option>
-                            <option value="Infant">Infant</option>
+                            <option value="infant">Infant</option>
                             <option value="toddler">Toddler</option>
                         </select>
 
