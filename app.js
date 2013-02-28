@@ -65,12 +65,18 @@ app.post('/api/invitations', function(req, res) {
     });
 });
 
+//UPDATE INVITATION
 app.put('/api/invitations/:id', function (req, res) {
-  res.send(200)
-  return;
-  models.Item.remove({ _id: req.params.id }, function(err) {
-    res.send(200);
-  });
+  delete req.body.id
+  delete req.body._id
+  delete req.body._v
+
+  Invitation.update( { _id: req.params.id }, req.body,function(err, numAffected){
+      console.log(numAffected);
+      Invitation.findOne( { _id: req.params.id }, function(err, invitation) {
+        res.send(invitation.toObject());
+      });
+    });
 });
 
 // DELETE INVITATION

@@ -49,10 +49,10 @@
             <td><%= password %></td>
         </script>
 
-        <script type="text/template" id="new-invitation-template">
+        <script type="text/template" id="invitation-form-template">
             <div class="span12">
                 <fieldset>
-                    <legend>Invitation Details</legend>
+                    <legend class="header">Invitation Details</legend>
                     <br />
                     <label>Invitation Label</label>
                     <input id="invitation-label" type="text" placeholder="Serenity Crew">
@@ -62,8 +62,8 @@
 
                     <label>Guests Of</label>
                     <select id="invitation-side" class="span2">
-                        <option value="lisa">Lisa</option>
-                        <option value="ryan">Ryan</option>
+                        <option class="lisa" value="lisa">Lisa</option>
+                        <option class="ryan" value="ryan">Ryan</option>
                     </select>
 
                     <br />
@@ -96,7 +96,7 @@
         </script>
 
         <script type="text/template" id="invitee-item-template">
-            <span><%= name %> - <%= type %></span>
+            <span><%= name %> - <%= type %> <a href="#">remove</a></span>
         </script>
 
         <script type="text/template" id="new-person-template">
