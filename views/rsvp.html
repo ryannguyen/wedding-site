@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Lisa &lt;3 Ryan RSVP</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
+        <script>
+    		window.VARS = {}
+        	<% if(invitation) { %>
+        		VARS.invitation = <%- invitation %>;
+        	<% } %>
+        </script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="app" class="container"></div>
+
+        <script type="text/template" id="app-template">
+        </script>
+
+        <script type="text/template" id="person-input-template">
+            <h3>{{name}}</h3>
+            <span>Attending?</span>
+            <select class="input-small" name="response">
+                <option></option>
+                <option value="n" {{#if not_attending}}selected{{/if}}>No</option>
+                <option value="y" {{#if attending}}selected{{/if}}>Yes</option>
+            </select>
+
+            {{#if show_seating_option}}
+            <select name="chair">
+                <option></option>
+                <option value="1" {{#if provided}}selected{{/if}}>Will Provide My Own Seating</option>
+                <option value="2" {{#if booster}}selected{{/if}}>Need Booster</option>
+                <option value="3" {{#if high_chair}}selected{{/if}}>Need High Chair</option>
+            </select>
+            {{/if}}
+        </script>
+
+        <script type="text/template" id="invitation-template">
+            <div class="span12">
+                <fieldset>
+                    <legend class="header">RSVP - {{ label }}</legend>
+                    <br />
+                    <div class="people"></div>
+                    <br />
+                    <br />
+
+                   	<label>Comments</label>
+                    <textarea rows="4" class='input-xlarge' id="invitation-comments">{{#if comments}}{{comments}}{{/if}}</textarea>
+                </fieldset>
+                <div class="alert alert-success" style="display: none">
+                    <strong>Success!</strong> Thanks for responding! Refresh the page if you want to change your response
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary save">Save</button>
+                    <button type="button" class="btn cancel">Cancel</button>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/template" id="login-template">
+    		<div class="row">
+    			<div class="span12">
+        			<br />
+	        		<form method="post" action ="/rsvp">
+	  					<fieldset>
+	    					<label>Enter Your Password</label>
+						    <input type="text" placeholder="My Password" name="password">
+						    <p></p>
+					    	<button type="submit" class="btn">Submit</button>
+					  </fieldset>
+					</form>
+				</div>
+			</div>
+        </script>
+        <script src="/js/vendor/jquery-1.9.0.min.js"></script>
+        <script src="/js/vendor/bootstrap.min.js"></script>
+        <script src="/js/vendor/handlebars.js"></script>
+        <script src="/js/vendor/underscore-min.js"></script>
+        <script src="/js/vendor/backbone-min.js"></script>
+        <script src="/js/rsvp.js"></script>
+    </body>
+</html>

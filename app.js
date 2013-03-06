@@ -18,9 +18,11 @@ mongoose.connect(connection_string);
 
 var invitationSchema = new mongoose.Schema({
   address: String,
+  comments: String,
   label: String,
   password: String,
   people: Array,
+  photos: Array,
   side: String
 });
 var Invitation = connection.model('Invitation', invitationSchema);
@@ -93,6 +95,22 @@ app.post('/api/invitations/:id', function (req, res) {
   models.Item.remove({ _id: req.params.id }, function(err) {
     res.send(200);
   });
+});
+
+// RSVP
+app.get('/rsvp', function(req, res) {
+  res.render('rsvp.html', {invitation: null });
+});
+
+app.post('/rsvp', function(req, res) {
+  console.log(req.body.password);
+
+  Invitation.findOne({ password: req.body.password }, function(err, result) {
+      if(result)
+        res.render('rsvp.html', {invitation: JSON.stringify(result.toObject())  });
+      else
+        res.redirect('/rsvp');
+  })
 });
 
 http.createServer(app).listen(app.get('port'), function(){
