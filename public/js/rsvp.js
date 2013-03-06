@@ -103,7 +103,7 @@ $(function() {
         className: 'row',
         template: _.template($('#login-template').html()),
         render: function() {
-           // this.$el.html(this.template());
+            this.$el.html(this.template());
             return this;
         }
     });
