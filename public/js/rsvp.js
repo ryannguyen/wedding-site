@@ -73,6 +73,7 @@ $(function() {
         template: Handlebars.compile($('#invitation-template').html()),
         events: {
             'click .save' : 'save',
+            'click #invitation-lodging' : 'set_lodging'
         },
         render: function() {
             this.$el.html(this.template(this.model.attributes));
@@ -90,12 +91,21 @@ $(function() {
             var _this = this;
 
             this.model._setPeople();
-            this.model.save({comments: this.$("#invitation-comments").val()}, {
+            console.log( this.$('#invitation-lodging').attr('checked') );
+            this.model.save({
+                comments: this.$("#invitation-comments").val(),
+                email: this.$("#invitation-email").val(),
+                lodging: this.model.get('lodging')
+            }, {
                 success: function(invitation, response) {
                     _this.$('.alert').show();
                     _this.$('.form-actions').hide();
                 }
             });
+        },
+        set_lodging: function() {
+            this.model.set('lodging', (this.model.get('lodging') == 0 ? 1 : 0));
+            console.log(this.model.get('lodging'));
         }
     });
 

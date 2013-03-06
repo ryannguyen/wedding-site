@@ -19,7 +19,9 @@ mongoose.connect(connection_string);
 var invitationSchema = new mongoose.Schema({
   address: String,
   comments: String,
+  email: String,
   label: String,
+  lodging: Number,
   password: String,
   people: Array,
   photos: Array,

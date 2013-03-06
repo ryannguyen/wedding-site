@@ -61,11 +61,21 @@
                     <br />
                     <br />
 
+                    <label>Email</label>
+                    <input id="invitation-email" type="text" value="{{#if email}}{{email}}{{/if}}">
+
                    	<label>Comments</label>
                     <textarea rows="4" class='input-xlarge' id="invitation-comments">{{#if comments}}{{comments}}{{/if}}</textarea>
+
+                <label class="checkbox">
+                      <input {{#if lodging}}checked="checked"{{/if}} type="checkbox" name="lodging" id="invitation-lodging"> Need Lodging? Let us know and we'll give you more info soon!
+                    </label>
                 </fieldset>
                 <div class="alert alert-success" style="display: none">
-                    <strong>Success!</strong> Thanks for responding! Refresh the page if you want to change your response
+                    <strong>Success!</strong>
+
+                    <p>Thanks for responding! Refresh the page if you want to change your response</p>
+                    <p>Check back soon for more info!</p>
                 </div>
 
                 <div class="form-actions">
