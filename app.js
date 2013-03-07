@@ -25,7 +25,8 @@ var invitationSchema = new mongoose.Schema({
   password: String,
   people: Array,
   photos: Array,
-  side: String
+  side: String,
+  modified_date: Date
 });
 var Invitation = connection.model('Invitation', invitationSchema);
 
@@ -75,6 +76,8 @@ app.put('/api/invitations/:id', function (req, res) {
   delete req.body.id
   delete req.body._id
   delete req.body._v
+
+  req.body.modified_date = Date.now();
 
   Invitation.update( { _id: req.params.id }, req.body,function(err, numAffected){
       console.log(numAffected);
