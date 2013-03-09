@@ -15,6 +15,7 @@
 
         <link rel="stylesheet" href="/css/normalize.css">
         <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/style.css">
         <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
@@ -40,8 +41,7 @@
                     <tr>
                         <th>Invitation</th>
                         <th>Address</th>
-                        <th># Guests</th>
-                        <th>Side</th>
+                        <th>Replied</th>
                         <th>Password</th>
                     </tr>
                 <tbody>
@@ -51,11 +51,13 @@
         </script>
 
         <script type="text/template" id="invitation-table-row-template">
-            <td><%= label %></td>
+            <td><a href="#" class="edit"><%= label %></a></td>
             <td><%= address ? address.replace(/\r|\n/gi, ', ') : '' %></td>
-            <td><%= people.length %></td>
-            <td><%= side ? side.substr(0,1).toUpperCase() : '' %></td>
+            <td><%= modified_date ? 'Y' : 'N' %></td>
             <td><%= password %></td>
+            <td>
+                <a href="#" class="edit">Edit</a>
+            </td>
         </script>
 
         <script type="text/template" id="invitation-form-template">
@@ -112,14 +114,18 @@
         </script>
 
         <script type="text/x-underscore-template" id="app-template">
-            <ul class="nav nav-pills">
-                <li class="active">
-                    <a href="#" class="invitations-link">Home</a>
-                </li>
-                <li>
-                    <a href='#' class="new-invitation-link">New Invitation</a>
-                </li>
-            </ul>
+            <div class="row">
+                <div class="span12">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="#" class="invitations-link">Home</a>
+                        </li>
+                        <li>
+                            <a href='#' class="new-invitation-link">New Invitation</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
             <div id="content"></div>
         </script>
@@ -129,6 +135,14 @@
         <script src="/js/vendor/bootstrap.min.js"></script>
         <script src="/js/vendor/underscore-min.js"></script>
         <script src="/js/vendor/backbone-min.js"></script>
+        <script src="/js/models.js"></script>
+        <script src="/js/collections.js"></script>
         <script src="/js/admin.js"></script>
+        <script>
+            $(document).ready(function() {
+                window.App = new window.Wedding.AppView;
+                window.App.render();
+            });
+        </script>
     </body>
 </html>

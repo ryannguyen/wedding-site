@@ -1,113 +1,19 @@
-$(function() {
-    /**
-        MODELS
-     */
-    var _events = _.extend({}, Backbone.Events);
+var Wedding = (window.Wedding = window.Wedding || {});
 
-    var Invitation = Backbone.Model.extend({
-        defaults: {
-            address: '',
-            side: ''
-        },
-        initialize: function(attr, options) {
-            attr = attr || {};
-
-            if(attr.people) {
-                this.people = new People(attr.people);
-            } else {
-                this.people = new People;
-            }
-
-            if(attr._id) {
-                this.set('id', attr._id);
-            }
-        },
-        _setPeople: function() {
-            var people = [];
-            this.people.each(function(person) {
-                people.push(person.attributes);
-            });
-
-            this.set('people', people);
-            return this;
-        },
-        _generatePassword: function() {
-            if(this.get('password')) return;
-
-            var text = "";
-
-            // no i or l to avoid confusion
-            var possible = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
-
-            for( var i=0; i < 5; i++ )
-                text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-            this.set('password', text)
-            return this;
-        },
-        prep: function() {
-            this._setPeople()._generatePassword();
-            return this;
-        },
-        clear: function() {
-            Backbone.Model.prototype.clear.apply(this, arguments);
-            this.people.reset(null);
-        }
-
-    });
-
-    var Person = Backbone.Model.extend({});
-
-    /**
-        COLLECTIONS
-     */
-    var Invitations = Backbone.Collection.extend({
-        adultCount: 0,
-        childrenCount: 0,
-        toddlerCount: 0,
-        infantCount: 0,
-        url: '/api/invitations',
-        model: Invitation,
-        initialize: function() {
-            this.count();
-            this.listenTo(this, 'reset', this.count);
-        },
-        comparator: function(model) {
-            return model.get('label').toLowerCase();
-        },
-        count: function() {
-            var _this = this;
-            this.each(function(model) {
-                model.people.each(function(person) {
-                    if(person.get('type') == "adult" )
-                        _this.adultCount = _this.adultCount + 1;
-                    if(person.get('type') == "child" )
-                        _this.childrenCount = _this.childrenCount + 1;
-                    if(person.get('type') == "infant" || person.get('type') == "Infant" )
-                        _this.infantCount = _this.infantCount + 1;
-                    if(person.get('type') == "toddler" )
-                        _this.toddlerCount = _this.toddlerCount + 1;
-
-                });
-            });
-        }
-    });
-
-    var People = Backbone.Collection.extend({
-        model: Person
-    });
+(function(App) {
+    App._events = _.extend({}, Backbone.Events);
 
     /**
        VIEWS
      */
-    var InvitationsView = Backbone.View.extend({
+    App.InvitationsView = Backbone.View.extend({
         className: 'row',
         template: _.template($('#invitations-template').html()),
         initialize: function() {
             this.listenTo(this.collection, 'add', this.addInvitation);
             this.listenTo(this.collection, 'reset', this.renderInvitations);
             this.listenTo(this.collection, 'reset', this.updateCount);
-            this.listenTo(_events, "editInvitation", this.hide);
+            this.listenTo(App._events, "editInvitation", this.hide);
         },
         render: function() {
             this.$el.html(this.template({
@@ -126,12 +32,12 @@ $(function() {
         },
         renderInvitations: function() {
             this.collection.each(function(i) {
-                var view = new InvitationTableRow({ model: i });
+                var view = new App.InvitationTableRow({ model: i });
                 this.$('.table tbody').append( view.render().el );
             });
         },
         addInvitation: function(invitation) {
-            var view = new InvitationTableRow({ model: invitation });
+            var view = new App.InvitationTableRow({ model: invitation });
             var index = this.collection.indexOf(invitation);
 
             if(index == 0) {
@@ -148,11 +54,11 @@ $(function() {
         },
     });
 
-    var InvitationTableRow = Backbone.View.extend({
+    App.InvitationTableRow = Backbone.View.extend({
         tagName: 'tr',
         template: _.template($('#invitation-table-row-template').html()),
         events: {
-            'click' : 'editInvitation'
+            'click a.edit' : 'editInvitation'
         },
         initialize: function() {
             this.listenTo(this.model.collection, 'reset', this.remove);
@@ -162,14 +68,19 @@ $(function() {
             this.$el.html(this.template( this.model.attributes ));
             return this;
         },
-        editInvitation: function () {
-            var view = new EditInvitationView({ model: this.model });
+        editInvitation: function (evt) {
+            console.log("1");
+            var view = new App.EditInvitationView({ model: this.model });
+            console.log("2");
             $("#content").append(view.render().$el);
-            _events.trigger('editInvitation');
+            console.log("3");
+            App._events.trigger('editInvitation');
+
+            return false;
         }
     });
 
-    var NewInvitationView = Backbone.View.extend({
+    App.NewInvitationView = Backbone.View.extend({
         className: 'row',
         template: _.template($('#invitation-form-template').html()),
         events: {
@@ -178,7 +89,7 @@ $(function() {
             'click .cancel' : 'cancel'
         },
         initialize: function() {
-            this.model = new Invitation();
+            this.model = new App.Invitation();
         },
         render: function() {
             this.$el.html(this.template());
@@ -195,7 +106,7 @@ $(function() {
         addInvitee: function() {
             var $name = this.$("#invitee-name"),
                 $type = this.$("#invitee-type"),
-                person = new Person({
+                person = new App.Person({
                     name: $name.val(),
                     type: $type.val()
                 });
@@ -207,11 +118,11 @@ $(function() {
             $type.val('adult');
         },
         addInviteeToForm: function(person) {
-            var view = new InviteeItemView({ model: person, collection: this.model.people});
+            var view = new App.InviteeItemView({ model: person, collection: this.model.people});
             this.$('#invitees').append( view.render().el );
         },
         cancel: function() {
-            _events.trigger('showInvitations');
+            App._events.trigger('showInvitations');
         },
         save: function() {
             var label = this.$('#invitation-label').val();
@@ -227,18 +138,19 @@ $(function() {
             this.model.set({ label: label, side: side, address:address});
             this.collection.create(this.model.prep().attributes, {
                 success: function() {
-                    _events.trigger('showInvitations');
+                    App._events.trigger('showInvitations');
                 }
             });
         }
     });
 
-    var EditInvitationView = NewInvitationView.extend({
+    App.EditInvitationView = App.NewInvitationView.extend({
         initialize: function() {
-            this.listenTo(_events, "showInvitations", this.remove);
+            this.listenTo(App._events, "showInvitations", this.remove);
+                        console.log(this.model.id);
         },
         render: function() {
-            NewInvitationView.prototype.render.apply(this, arguments);
+            App.NewInvitationView.prototype.render.apply(this, arguments);
 
 
             this.$('#invitation-label').val(this.model.get('label'));
@@ -266,7 +178,7 @@ $(function() {
             this.model.save({ label: label, side: side, address:address}, {
                 success: function() {
                     console.log('hi');
-                    _events.trigger('showInvitations');
+                    App._events.trigger('showInvitations');
                 },
                 error: function() {
                     console.log('error');
@@ -275,7 +187,7 @@ $(function() {
         }
     });
 
-    var InviteeItemView = Backbone.View.extend({
+    App.InviteeItemView = Backbone.View.extend({
         tagName: 'li',
         template: _.template($('#invitee-item-template').html()),
         events: {
@@ -298,8 +210,7 @@ $(function() {
         }
     });
 
-    var AppView = Backbone.View.extend({
-        className: 'row',
+    App.AppView = Backbone.View.extend({
         template: _.template($('#app-template').html()),
         events: {
             'click .invitations-link' : 'showInvitations',
@@ -309,17 +220,17 @@ $(function() {
             _.bindAll(this, '_showInvitations', '_showNewInvitationForm');
 
             this.$app = $('#app');
-            this.invitations = new Invitations;
+            this.invitations = new App.Invitations;
 
-            this.invitationFormView = new NewInvitationView({
+            this.invitationFormView = new App.NewInvitationView({
                 collection: this.invitations
             })
-            this.invitationsView = new InvitationsView({
+            this.invitationsView = new App.InvitationsView({
                 collection: this.invitations
             });
 
-            _events.on("showInvitations", this._showInvitations);
-            _events.on("showInvitationForm", this._showNewInvitationForm);
+            App._events.on("showInvitations", this._showInvitations);
+            App._events.on("showInvitationForm", this._showNewInvitationForm);
         },
         render: function() {
             this.$el.html(this.template());
@@ -332,7 +243,7 @@ $(function() {
             this.invitations.fetch();
         },
         showInvitations: function() {
-            _events.trigger('showInvitations');
+            App._events.trigger('showInvitations');
         },
         _showInvitations: function() {
             $('.active').removeClass('active')
@@ -341,7 +252,7 @@ $(function() {
             this.invitationsView.show();
         },
         showNewInvitationForm: function() {
-            _events.trigger('showInvitationForm');
+            App._events.trigger('showInvitationForm');
         },
         _showNewInvitationForm: function() {
             $('.active').removeClass('active')
@@ -350,7 +261,4 @@ $(function() {
             this.invitationFormView.show();
         }
     });
-
-    window.App = new AppView;
-    window.App.render();
-});
+})(Wedding);
