@@ -29,16 +29,22 @@
 
             <br />
             <div class="span12">
-                <strong>Adult Count:</strong> <span class="adultCount"><%= adultCount %></span><br />
-                <strong>Children Count:</strong> <span class="childCount"><%= childCount %></span><br />
-                <strong>Toddler Count:</strong> <span class="toddlerCount"><%= toddlerCount %></span><br />
-                <strong>Infant Count:</strong> <span class="infantCount"><%= infantCount %></span><br />
+                <strong>Adult Count:</strong> <span class="adultCount">{{ adultCount }}</span><br />
+                <strong>Children Count:</strong> <span class="childCount">{{ childCount }}</span><br />
+                <strong>Toddler Count:</strong> <span class="toddlerCount">{{ toddlerCount }}</span><br />
+                <strong>Infant Count:</strong> <span class="infantCount">{{ infantCount }}</span><br />
             </div>
+            <br />
+            <br />
+            <a href="#" class="filterInvitationsResponded">Show invitations that have responded</a>
+            <br />
+            <a href="#" class="showAllInvitations">Show all invitations</a>
 
             <div class="span12">
                 <table class="table">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Invitation</th>
                         <th>Address</th>
                         <th>Replied</th>
@@ -51,13 +57,23 @@
         </script>
 
         <script type="text/template" id="invitation-table-row-template">
-            <td><a href="#" class="edit"><%= label %></a></td>
-            <td><%= address ? address.replace(/\r|\n/gi, ', ') : '' %></td>
-            <td><%= modified_date ? 'Y' : 'N' %></td>
-            <td><%= password %></td>
-            <td>
-                <a href="#" class="edit">Edit</a>
-            </td>
+            <td><a href="#" class="edit"><i class="icon-edit"></i></a></td>
+            <td><a href="#" class="show">{{ label }}</a></td>
+            <td>{{address}}</td>
+            <td>{{#if hasResponded}}Y{{else}}N{{/if}}</td>
+            <td>{{ password }}</td>
+        </script>
+
+        <script type="text/template" id="invitation-template">
+            <h2>{{label}}</h2>
+            <ul>
+                {{#each people}}
+                <li>{{this.name}} - {{this.type}} - {{#if response}}{{response}}{{else}}Not Yet Responded{{/if}}</li>
+                {{/each}}
+            </ul>
+
+            <h2>Comments</h2>
+            <div>{{comments}}</div>
         </script>
 
         <script type="text/template" id="invitation-form-template">
@@ -107,7 +123,7 @@
         </script>
 
         <script type="text/template" id="invitee-item-template">
-            <span><%= name %> - <%= type %> <a href="#">remove</a></span>
+            <span>{{ name }} - {{ type }} <a href="#">remove</a></span>
         </script>
 
         <script type="text/template" id="new-person-template">
@@ -135,6 +151,7 @@
         <script src="/js/vendor/bootstrap.min.js"></script>
         <script src="/js/vendor/underscore-min.js"></script>
         <script src="/js/vendor/backbone-min.js"></script>
+        <script src="/js/vendor/handlebars.js"></script>
         <script src="/js/models.js"></script>
         <script src="/js/collections.js"></script>
         <script src="/js/admin.js"></script>

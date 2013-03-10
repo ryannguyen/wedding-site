@@ -8,12 +8,17 @@ var Wedding = (window.Wedding = window.Wedding || {});
      */
     App.InvitationsView = Backbone.View.extend({
         className: 'row',
-        template: _.template($('#invitations-template').html()),
+        template: Handlebars.compile($('#invitations-template').html()),
+        events: {
+            'click a.filterInvitationsResponded' : 'filterInvitationsResponded',
+            'click a.showAllInvitations' : 'showAllInvitations'
+        },
         initialize: function() {
             this.listenTo(this.collection, 'add', this.addInvitation);
             this.listenTo(this.collection, 'reset', this.renderInvitations);
             this.listenTo(this.collection, 'reset', this.updateCount);
             this.listenTo(App._events, "editInvitation", this.hide);
+            this.listenTo(App._events, "showInvitation", this.hide);
         },
         render: function() {
             this.$el.html(this.template({
@@ -52,37 +57,73 @@ var Wedding = (window.Wedding = window.Wedding || {});
         show: function() {
             this.$el.show();
         },
+        filterInvitationsResponded: function(evt) {
+            App._events.trigger('filterInvitationsResponded');
+            return false;
+        },
+        showAllInvitations: function(evt) {
+            App._events.trigger('showAllInvitations');
+            return false;
+        }
+    });
+
+    App.InvitationView = Backbone.View.extend({
+        className: 'row',
+        template: Handlebars.compile($('#invitation-template').html()),
+        initialize: function() {
+            this.listenTo(App._events, 'showInvitations', this.remove);
+        },
+        render: function() {
+            var obj = _.extend({ hasResponded: this.model.hasResponded()}, this.model.attributes );
+            this.$el.html(this.template( obj ));
+            return this;
+        }
     });
 
     App.InvitationTableRow = Backbone.View.extend({
         tagName: 'tr',
-        template: _.template($('#invitation-table-row-template').html()),
+        template: Handlebars.compile($('#invitation-table-row-template').html()),
         events: {
-            'click a.edit' : 'editInvitation'
+            'click a.edit' : 'editInvitation',
+            'click a.show' : 'showInvitation'
         },
         initialize: function() {
             this.listenTo(this.model.collection, 'reset', this.remove);
             this.listenTo(this.model, 'change', this.render);
+            this.listenTo(App._events, 'filterInvitationsResponded', this.filterResponded);
+            this.listenTo(App._events, 'showAllInvitations', this.show);
         },
         render: function() {
-            this.$el.html(this.template( this.model.attributes ));
+            var obj = _.extend({ hasResponded: this.model.hasResponded()}, this.model.attributes );
+            this.$el.html(this.template( obj ));
             return this;
         },
         editInvitation: function (evt) {
-            console.log("1");
             var view = new App.EditInvitationView({ model: this.model });
-            console.log("2");
             $("#content").append(view.render().$el);
-            console.log("3");
             App._events.trigger('editInvitation');
 
+            return false;
+        },
+        show: function() {
+            this.$el.show();
+            return false;
+        },
+        showInvitation: function(evt) {
+            var view = new App.InvitationView({ model: this.model });
+            $("#content").append(view.render().$el);
+            App._events.trigger('showInvitation');
+            return false;
+        },
+        filterResponded: function(evt) {
+            this.model.hasResponded() ? this.$el.show() : this.$el.hide();
             return false;
         }
     });
 
     App.NewInvitationView = Backbone.View.extend({
         className: 'row',
-        template: _.template($('#invitation-form-template').html()),
+        template: Handlebars.compile($('#invitation-form-template').html()),
         events: {
             'click .add-invitee-btn' : 'addInvitee',
             'click .save' : 'save',
@@ -189,7 +230,7 @@ var Wedding = (window.Wedding = window.Wedding || {});
 
     App.InviteeItemView = Backbone.View.extend({
         tagName: 'li',
-        template: _.template($('#invitee-item-template').html()),
+        template: Handlebars.compile($('#invitee-item-template').html()),
         events: {
             'click a' : 'removeInvitee'
         },
@@ -211,7 +252,7 @@ var Wedding = (window.Wedding = window.Wedding || {});
     });
 
     App.AppView = Backbone.View.extend({
-        template: _.template($('#app-template').html()),
+        template: Handlebars.compile($('#app-template').html()),
         events: {
             'click .invitations-link' : 'showInvitations',
             'click .new-invitation-link' : 'showNewInvitationForm'

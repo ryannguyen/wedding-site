@@ -56,6 +56,9 @@ var Wedding = (window.Wedding = window.Wedding || {});
         clear: function() {
             Backbone.Model.prototype.clear.apply(this, arguments);
             this.people.reset(null);
+        },
+        hasResponded: function() {
+            return !!this.people.find(function(p){ return p.get('response') });
         }
 
     });
