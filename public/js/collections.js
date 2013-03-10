@@ -10,6 +10,8 @@ var Wedding = (window.Wedding = window.Wedding || {});
         childrenCount: 0,
         toddlerCount: 0,
         infantCount: 0,
+        attendingCount: 0,
+        notAttendingCount: 0,
         url: '/api/invitations',
         model: App.Invitation,
         initialize: function() {
@@ -33,6 +35,16 @@ var Wedding = (window.Wedding = window.Wedding || {});
                         _this.toddlerCount = _this.toddlerCount + 1;
 
                 });
+
+                if(model.hasResponded()) {
+                    model.people.each(function(person) {
+                        if(person.get('response') == 'y') {
+                            _this.attendingCount = _this.attendingCount + 1;
+                        } else if(person.get('response') == 'n'){
+                            _this.notAttendingCount = _this.notAttendingCount + 1;
+                        }
+                    })
+                }
             });
         }
     });

@@ -25,7 +25,9 @@ var Wedding = (window.Wedding = window.Wedding || {});
                 adultCount: this.collection.adultCount,
                 infantCount: this.collection.infantCount,
                 childCount: this.collection.childrenCount,
-                toddlerCount: this.collection.toddlerCount
+                toddlerCount: this.collection.toddlerCount,
+                attendingCount: this.collection.attendingCount,
+                notAttendingCount: this.collection.notAttendingCount
             }));
             return this;
         },
@@ -34,6 +36,8 @@ var Wedding = (window.Wedding = window.Wedding || {});
             this.$('.infantCount').html(this.collection.infantCount);
             this.$('.childCount').html(this.collection.childrenCount);
             this.$('.toddlerCount').html(this.collection.toddlerCount);
+            this.$('.attendingCount').html(this.collection.attendingCount);
+            this.$('.notAttendingCount').html(this.collection.notAttendingCount);
         },
         renderInvitations: function() {
             this.collection.each(function(i) {
