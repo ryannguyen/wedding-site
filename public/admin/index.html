@@ -48,7 +48,7 @@
                     <tr>
                         <th></th>
                         <th>Invitation</th>
-                        <th>Address</th>
+                        <th>Updated</th>
                         <th>Replied</th>
                         <th>Password</th>
                     </tr>
@@ -61,7 +61,7 @@
         <script type="text/template" id="invitation-table-row-template">
             <td><a href="#" class="edit"><i class="icon-edit"></i></a></td>
             <td><a href="#" class="show">{{ label }}</a></td>
-            <td>{{address}}</td>
+            <td>{{modified_date}}</td>
             <td>{{#if hasResponded}}Y{{else}}N{{/if}}</td>
             <td>{{ password }}</td>
         </script>
