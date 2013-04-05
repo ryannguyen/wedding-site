@@ -1,0 +1,77 @@
+/*=========================================================
+ABOUT THIS STYLESHEET:
+
+This stylesheet is loaded by any device with a width less 
+than 700px.
+===========================================================
+
+OUTLINE:
+
+* Header
+* Forms
+
+************************************
+
+
+/* Header
+-----------------------------------*/
+.home #header hgroup,
+.home #header #site_title, 
+.home #header h3 {
+	position: static !important;
+}
+
+.home #header {
+	padding-bottom: 30px !important; padding-bottom: 3rem !important;
+}
+
+.home #site_title {
+	padding-top: 40px; padding-top: 4rem;
+}
+
+#header.home h3 {		
+	font-size: 16px; font-size: 1.6rem;
+	margin: 0 !important;
+}
+
+.home #header #site_title,
+#header h3 {
+	background: none !important;
+	width: auto !important;
+	height: auto !important;
+	text-align: center;
+}
+
+.home #header #site_title:before, 
+.home #header #site_title:after {
+	display: none;
+}
+
+/* Forms
+-----------------------------------*/
+label,
+input,
+textarea {
+	float: left !important;
+	width: 95% !important;
+	clear: both !important;
+	position: static !important;
+}
+
+.submit {
+	margin-left: 0 !important;
+}
+
+.comment_form input, 
+.comment_form label {
+	clear: none !important;
+	float: left !important;
+}
+
+.comment_form input {
+	width: 70% !important;
+}
+
+.comment_form label {
+	width: 20% !important;
+}

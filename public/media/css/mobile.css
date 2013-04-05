@@ -1,0 +1,277 @@
+/*=========================================================
+ABOUT THIS STYLESHEET:
+
+This stylesheet is loaded by any device with a width less 
+than 600px.
+===========================================================
+
+OUTLINE:
+
+* Structure
+* Text elements
+* Navigation
+* Gallery
+* Photo albums
+* Footer
+* Posts
+
+************************************
+
+/* Structure 
+-----------------------------------*/
+.wrapper {
+	width: 96%;
+	padding: 0 2%;
+}
+
+.responsive_hide {
+	display: none;
+}
+
+.column_33,
+.column_67,
+.column_66,
+.column_50,
+.column_25,
+.column_75,
+.column_40,
+.column_60,
+.column_80,
+.column_20 {
+	width: 98%;
+	margin-top: 0;
+	padding: 0 1% 2em 1%;
+	clear: both;
+	float: left;
+}
+
+.panel {
+	margin-bottom: 30px; margin-bottom: 3rem;
+}
+
+.panel .section_label {
+	margin-top: -3px;
+}
+
+.panel > div {
+	padding-bottom: 20px; padding-bottom: 2rem;
+}
+
+.home #header hgroup {		
+	height: 92px; height: 9.2rem !important;
+	float: left; 
+	width: 100%;
+	overflow: auto;
+}
+
+#slider {
+	position: relative;
+	float: left;
+	padding-bottom: 32px; padding-bottom: 3.2rem;
+}
+
+#site_title,
+.home #site_title {
+	font-size: 22px !important; font-size: 2.2rem !important;
+	line-height: 22px; line-height: 2.2rem;
+}
+
+#site_title {
+	padding: 28px 0 !important; padding: 2.8rem 0 !important;		
+}
+
+.home #site_title {		
+	padding-top: 22px !important; padding-top: 2.2rem !important;
+	padding-bottom: 0 !important;
+}
+
+.home #header h3 {
+	margin: 0 !important;
+	font-size: 15px !important; font-size: 1.5rem !important;
+}
+
+#page_title {
+	margin: 0;
+}
+
+#page_title h1, 
+#page_title h2 {
+	display: block;
+	width: 100%;
+	padding: 0;
+	line-height: 78px;
+	height: 78px;
+}
+
+#page_title h1:before,
+#page_title h2:before,
+#page_title h1:after,
+#page_title h2:after {
+	background-image: none !important;
+}
+
+
+/* Text elements
+-----------------------------------*/
+blockquote {
+	padding: 0 20px;
+}
+
+/* Navigation
+-----------------------------------*/
+#primary_nav {
+	position: relative;
+}
+
+#primary_nav li {
+	padding: 12px 2%;
+	font-size: 14px;
+}
+
+#primary_nav .menu-button {
+	display: block;
+	width: 96%;
+	padding: 6px 2%;
+	font-size: 12px;
+}
+
+#primary_nav ul {
+	display: none;
+}
+
+/* Gallery
+-----------------------------------*/
+.gallery li {
+	width: 100%;
+	margin: 0;
+}
+
+.carousel.medium li,
+.carousel.medium li:nth-child(2n+2) {
+	width: 48.5%;
+	margin-right: 3%;
+}
+
+.carousel {
+	padding-bottom: 0;
+}
+
+.carousel li, 
+.carousel.medium li:nth-child(2n+3) {
+	clear: none;
+}
+
+.carousel li:after {
+	height: 19px; height: 1.9rem;
+}
+
+#cboxCurrent {
+	display: none !important;
+}
+
+.thumbnails li,
+.thumbnails .album, 
+.medium li, 
+.medium .album {
+	margin-right: 3%;
+}
+
+.thumbnails li,
+.entry img.thumbnail,
+img.thumbnail,
+figure.thumbnail {
+	width: 22.75%;
+}
+
+.thumbnails .album {
+	width: 18.75%;
+	padding: 0 2%;
+}
+
+.medium li,
+.entry img.medium,
+img.medium,
+figure.medium {
+	width: 48.5%;
+}
+
+.medium .album {
+	width: 42.5%;
+	padding: 0 3%;
+}
+
+.thumbnails li:nth-child(4n+4),
+.thumbnails .album:nth-child(4n+4),
+.medium li:nth-child(2n+2),
+.medium .album:nth-child(2n+2) {
+	margin-right: 0;
+}
+
+.thumbnails li:nth-child(4n+5),
+.thumbnails .album:nth-child(4n+5),
+.medium li:nth-child(2n+3),
+.medium .album:nth-child(2n+3) {
+	clear: left;
+}
+
+/* Navigation
+-----------------------------------*/
+#primary_nav li {
+	position: relative;	
+}
+
+#primary_nav li .sub_menu {
+	float: left;
+	clear: both;
+	width: 100%;
+	z-index: 5000;
+	margin-bottom: 20px; margin-bottom: 2rem;
+	position: relative !important;
+	top: 12px !important;
+}
+
+#primary_nav li .sub_menu li {
+	background: none;
+}
+
+#primary_nav li .sub_menu a {
+	display: block;
+	background-image: none !important;
+}
+
+/* Photo albums
+-----------------------------------*/
+.album {
+	width: 94%;
+	padding: 0 3%;
+}
+
+.album img {
+	width: 100%;
+}
+
+/* Footer
+-----------------------------------*/
+#pre_footer {
+	text-align: center;	
+	padding: 26px 0; padding: 2.6rem 0;
+}
+
+#pre_footer h4 {
+	display: block;
+} 
+
+#pre_footer h4,
+#pre_footer div {
+	margin-bottom: 10px; margin-bottom: 1rem;	
+}
+
+/* Posts
+-----------------------------------*/
+.panel .post_meta > div,
+.post_meta > div, 
+.comment_date {
+	display: block;
+	padding: 0;
+	background: none;
+}

@@ -1,0 +1,406 @@
+/*=========================================================
+ABOUT THIS STYLESHEET:
+
+This stylesheet is loaded by any device with a minimum 
+width of  700px.
+===========================================================
+
+OUTLINE:
+
+* Structure
+* Text elements 
+* Navigation
+* Header
+* Columns
+* Images
+
+************************************
+
+/* Structure
+-----------------------------------*/
+/* Default -- required outside of @media query for IE8 and lower */
+.wrapper {
+	margin: 0px auto;
+    width: 912px;
+    padding: 0 53px;
+}
+
+#container {
+	margin-top: -80px;
+	padding-top: 80px;
+}
+
+#content {
+	width: 64.65%;
+	float: left;
+}
+
+#sidebar {
+	width: 31.3%;
+	float: right;
+}
+
+/* Resize wrapper for smaller screens (ie. tablets) */
+@media all and (max-width : 1024px) {
+    .wrapper {
+        width: 96%; 
+        padding: 0 2%;
+    }
+}
+
+/* Text elements
+-----------------------------------*/
+
+
+/* Navigation 
+-----------------------------------*/
+#primary_nav {
+	padding-bottom: 5px; padding-bottom: 0.5rem;
+}
+
+#primary_nav .menu-button {
+	display: none;
+}
+
+#primary_nav ul {
+	width: 100%;
+	text-align: center;	
+	margin-bottom: 0;	
+	padding: 26px 0 5px; padding: 2.6rem 0 0.5rem;
+}
+
+#primary_nav li {
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	font-size: 15px: 1.5rem;
+	padding: 0 20px; padding: 0 2rem;
+	text-transform: uppercase;	
+}
+
+#primary_nav a {	
+	text-decoration: none;
+	display: block;
+	width: 100%;
+	padding: 0 4px 21px; padding: 0 0.4rem 2.1rem;
+}
+
+#primary_nav a {
+	transition: none;
+	-moz-transition: none;
+	-webkit-transition: none;
+	-o-transition: none;
+}
+
+#primary_nav li ul {
+	display: none;
+	z-index: 1000;		
+	text-align: left;		
+	width: 200px; width: 20rem;
+	margin-top: -21px; margin-top: -2.1rem;
+	padding-top: 12px; padding-top: 1.2rem;
+	padding-bottom: 0;
+	border-radius: 0 0 6px 6px;
+	-moz-border-radius: 0 0 6px 6px;
+}
+
+#primary_nav .active > ul {
+	display: block;
+}
+
+#primary_nav li:hover ul {
+	display: block;
+}
+
+#primary_nav li li {
+	font: 13px Arial, Helvetica, sans-serif; font-size: 1.3rem;
+	text-transform: none;
+	float: left;
+	width: 90%;
+	padding: 0 5%;
+}
+
+#primary_nav li li a {
+	padding: 8px 0; padding: 0.8rem 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* Header
+-----------------------------------*/
+#site_title {
+	font-size: 38px; font-size: 3.8rem;
+}
+
+#page_title h1,
+#page_title h2 {
+	font-size: 29px; font-size: 2.9rem;
+}
+
+#site_title {
+	line-height: 30px;
+}
+
+.home #site_title {	
+	height: 81px; height: 8.1rem;
+	padding: 20px 50px 0 50px; padding: 2rem 5rem 0;
+	position: relative;
+	z-index: 2;
+}
+
+.home #header h3 {	
+	height: 54px; height: 5.4rem;
+	width: 550px; width: 55rem;
+	margin-top: -29px; margin-top: -2.9rem;
+	padding-top: 13px; padding-top: 1.3rem;
+	padding-bottom: 0;
+	position: relative;
+	z-index: 1;
+}
+
+.home #header  {
+	padding-bottom: 104px; padding-bottom: 10.4rem;	
+	background: none;
+}
+
+/* Columns
+-----------------------------------*/
+.columns {
+    clear:both;
+    overflow:hidden;
+} 
+
+.column_33,
+.column_67,
+.column_66,
+.column_50,
+.column_25,
+.column_75,
+.column_40,
+.column_60,
+.column_80,
+.column_20 {
+	position: relative;
+    float:left;  
+    margin:0 0 1em 0;    
+    padding:0 4% 0 0;
+}
+
+.column_last {
+    background:none !important;    
+    padding-right: 0;
+    clear: right;
+}
+
+.column_33 {
+    width:30.66%;
+}
+
+.column_67,
+.column_66 {
+    width:65.34%;  
+}
+
+.column_50 {
+    width:48%;
+}
+
+.column_25 {
+    width:22%;
+}
+
+.column_75 {
+    width:71%;
+}
+
+.column_40 {
+    width:36%;
+}
+
+.column_60 {
+    width:56%;
+}
+
+.column_20 {
+    width:16%;
+}
+
+.column_80 {
+    width:76%;
+}
+
+.no_divider {
+	background: none !important;
+}
+
+/* Images
+-----------------------------------*/
+
+/* Gallery styles */
+
+.gallery.thumbnails li:after {
+	height: 18px; height: 1.8rem;
+}
+
+.gallery.medium li:after,
+.gallery.large li:after {
+	height: 32px; height: 3.2rem; /* This is chosen because it's the height of the larger shadow of the two skins */
+}
+
+.gallery.medium li,
+.gallery.large li {
+	margin-right: 3.5%; /* 3.5% of 912px = 32px */
+}
+
+.gallery.medium li {
+	width: 22.375%; 
+}
+
+.gallery.large li {
+	width: 48.25%;
+}
+
+/* Carousel */
+
+
+/* Photo album sets */ 
+
+.albums {
+	width: 100%;
+}
+
+.album {	
+	padding: 0 2.4% 14px; padding-bottom: 1.4rem;	
+}
+
+.albums.medium .album {	
+	width: 26.53%;
+	margin-right: 3%;
+}
+
+.albums.large .album {
+	width: 43.2%;
+	margin-right: 4%;
+}
+
+.albums.fullwidth .album {
+	width: 95.2%;
+	margin-right: 0;
+}
+
+.albums.medium .album:nth-child(3n+3),
+.albums.large .album:nth-child(2n+2),
+.albums.fullwidth .album,
+.album.last {
+	margin-right: 0;
+}
+
+.album img {
+	width: 100%;
+}
+
+/* Image sizes */
+
+.thumbnails li,
+.thumbnails .album {
+	margin-right: 2%;
+}
+
+.thumbnails li, 
+.thumbnails .album,
+.entry img.thumbnail,
+img.thumbnail,
+figure.thumbnail {
+	width: 15%;
+}
+
+.medium li, 
+.medium .album,
+.entry img.medium,
+img.medium,
+figure.medium {
+	width: 22.75%;
+}
+
+.large li, 
+.large .album,
+.entry img.large,
+img.large,
+figure.large {
+	width: 48.5%;
+}
+
+.fullwidth li,
+.fullwidth .album, 
+img.fullwidth,
+figure.fullwidth {
+	width: 100%;
+	margin: 0 0 13px; margin-bottom: 1.3rem;
+}
+
+.entry img.fullwidth,
+.entry img {
+	margin-left: 0;
+	width: 100%;
+}
+
+.entry img,
+.entry figure,
+.entry .float_left img,
+.entry .float_left figure {
+	float: left;
+	margin: 0 13px 13px 0; margin: 0 1.3rem 1.3rem 0;
+}
+
+img.float_right,
+figure.float_right {
+	float: right;
+	margin: 0 0 13px 13px; margin: 0 0 1.3rem 1.3rem;
+}
+
+.thumbnails li:nth-child(6n+6),
+.thumbnails .album:nth-child(6n+6),
+.medium li:nth-child(4n+4),
+.medium .album:nth-child(4n+4),
+.large li:nth-child(2n+2),
+.large .album:nth-child(2n+2) {
+	margin-right: 0;
+}
+
+.thumbnails li:nth-child(6n+7),
+.thumbnails .album:nth-child(6n+7),
+.medium li:nth-child(4n+5),
+.medium .album:nth-child(4n+5),
+.large li:nth-child(2n+3),
+.large .album:nth-child(2n+3) {
+	clear: left;
+}
+
+.carousel li {
+	clear: none !important;
+}
+
+figure img, 
+.entry figure img {
+	margin: 0 !important;
+}
+
+img.fullwidth,
+.fullwidth img {
+	max-width: 932px;
+}
+
+img.large,
+.large img {
+	max-width: 460px;
+}
+
+img.medium,
+.medium img {
+	max-width: 262px;
+}
+
+img.thumbnail, 
+.thumbnails img {
+	max-width: 157px;
+}

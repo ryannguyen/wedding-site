@@ -1,0 +1,39 @@
+/*
+ABOUT THIS STYLESHEET:
+This stylesheet is used by versions of Internet Explorer IE8 and earlier. 
+*/
+
+/* Remove shadows on thumbnails */
+.gallery.thumbnails li:after {
+	background: none !important;
+}
+
+/* Fix incorrect positioning of banner & date on homepage */
+.home #header hgroup {
+	bottom: -17px !important;
+}
+
+.home #header h3 {
+	bottom: 17px !important;
+}
+
+/* 
+PIE.js adds box-shadow and border-radius capabilities to some elements, 
+but it is not able to apply it to the panels for some reason. 
+*/
+.panel {
+	border-radius: 0px !important;
+}
+
+/* nth-child will not work for the widget gallery, since it's dynamically loaded, 
+so target classes instead */
+.widget_gallery li.fetched-3,
+.widget_gallery li.fetched-7,
+.widget_gallery li.fetched-11,
+.widget_gallery li.fetched-15,
+.widget_gallery li.fetched-19,
+.widget_gallery li.fetched-23,
+.widget_gallery li.fetched-27,
+.widget_gallery li.fetched-31 {
+	margin-right: 0;
+}

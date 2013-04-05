@@ -1,0 +1,1506 @@
+/*=========================================================
+ABOUT THIS STYLESHEET:
+
+This stylesheet is loaded by all devices, regardless of their size. 
+===========================================================
+
+OUTLINE:
+
+Global elements: 
+
+* Structure				- body, #wrapper, .panel
+* Text elements 		- h1, h2, h3, h4, h5, h6, p, li, a
+* Backgrounds 			- sets up background repeats and positioning
+* Utilities 			- a set of utitlity classes
+* Transitions			- defines CSS3 transitions
+* Forms					- sets up form styling
+* Widgets				- styling for sidebar widgets
+* Google Map            
+* Slider				- styling for responsive slider on homepage
+* Gallery & Images      - galleries, carousel and default image styles
+
+Sections: 
+
+* Navigation
+* Header
+* Footer
+* Posts
+* Comments
+
+************************************
+
+/* Structure
+-----------------------------------*/
+.wrapper {
+	overflow: hidden;
+}
+
+#main {
+	float: left;
+	width: 100%;	
+	overflow: hidden;
+	padding: 10px 51px 39px 51px; padding: 1rem 5.1rem 3.9rem 5.1rem;
+	margin-left: -51px; margin-left: -5.1rem;	
+}
+
+.panel {
+	float: left;
+	width: 96%;
+	height: 100%;
+	padding: 0 2%;
+	border-radius: 9px 9px 0 0;
+	-moz-border-radius: 9px 9px 0 0;
+	-webkit-border-radius: 9px 9px 0 0;
+	position: relative;	 	
+	margin-bottom: 44px; margin-bottom: 4.4rem;
+	z-index: 3;	
+}
+
+.panel_last {
+	margin-bottom: 5px; margin-bottom: 0.5rem;
+}
+
+.waves {
+	display: block;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;	
+	height: 10px;
+	margin-bottom: -10px;	
+	padding: 0 !important;
+}
+
+.widget .waves {
+	height: 14px;
+	margin-bottom: -14px;
+}
+
+.panel:before,
+.panel:after,
+#header.home:before,
+#header.home:after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	height: 100%;
+	background-repeat: no-repeat;	
+}
+
+.panel:before,
+.panel:after {
+	background-position: 0 50%;
+}
+
+#header.home:before,
+#header.home:after {
+	background-position: 0 0;
+}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+	display: block;
+}
+ 
+* html .clearfix {
+	height: 1%;
+}
+
+/* Text elements
+-----------------------------------*/
+html {
+	font-size: 62.5%; /* Set base font size to 10px */
+}
+
+body {
+	font: 300 13px/19px 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1.3rem; line-height: 1.9rem;
+	letter-spacing: 0.03em;
+}
+
+/* Headings & paragraphs */
+h1 {
+	font-size: 28px; font-size: 2.8rem;
+	line-height: 40px; line-height: 4rem;
+}
+
+h2,
+.post_header,
+h1.smaller {
+	font-size: 25px; font-size: 2.5rem;
+	line-height: 36px; line-height: 3.6rem;
+}
+
+h3, 
+h2.smaller {
+	font-size: 22px; font-size: 2.2rem;
+	line-height: 31px; line-height: 3.1rem;
+}
+
+h4,
+h3.smaller {
+	font-size: 18px; font-size: 1.8rem;
+	line-height: 26px; line-height: 2.6rem;
+}
+
+h5,
+h4.smaller {
+	font-size: 16px; font-size: 1.6rem;
+	line-height: 23px; line-height: 2.3rem;
+}
+
+h6,
+h5.smaller {
+	font-size: 14px; font-size: 1.4rem;
+	line-height: 20px; line-height: 2.1rem;
+}
+
+h6.smaller {
+	font-size: 13px; font-size: 1.3rem;
+	line-height: 19px; line-height: 1.9rem;
+}
+
+h1,
+h2,
+h3, 
+h4,
+h5,
+h6 {
+	font-weight: normal !important;
+	margin: 0 0 13px; margin-bottom: 1.3rem;		
+}
+
+.entry h1,
+.entry h2,
+.entry h3,
+.entry h4,
+.entry h5,
+.entry h6 {
+	padding: 13px 0 0; padding-top: 1.3rem;
+}
+
+.overline,
+.underline {
+	float: left;
+	width: 100%;
+}
+
+.overline,
+.entry .overline {
+	margin-top: 13px; margin-top: 1.3rem;
+}
+
+.underline,
+.entry .underline {
+	padding-bottom: 13px; padding-bottom: 1.3rem;
+}
+
+/* Fonts */
+h1,
+h2,
+h3, 
+h4,
+h5,
+h6,
+blockquote,
+.double_dotted, 
+.double_dotted *,
+.post_meta,
+.section_label, 
+.widget_title, 
+.posts_widget .post_date,
+.twitter_widget .time_ago {
+	font-family: 'Bitter', Georgia, 'Times New Roman', serif;
+} 
+
+#site_title,
+.double_dotted h4 {
+	font-family: 'Sofia', 'Bitter', Georgia, 'Times New Roman', serif;
+}
+
+input,
+textarea,
+.alt,
+.quote .stated_by, 
+.posts_widget h4 {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Letter spacing */
+#primary_nav a,
+.section_label,
+.widget_title {
+	letter-spacing: 0.1em;
+}
+
+#header h3 {
+	letter-spacing: 0.01em;
+}
+
+#page_title h1,
+#page_title h2 {
+	letter-spacing: 0.03em;
+}
+
+/* Headers without padding */
+.section_label, 
+#pre_footer h3 {
+	padding: 0 !important;
+}
+
+blockquote {
+	text-align: center;	
+	margin-bottom: 20px; margin-bottom: 2rem;
+	font-style: italic;
+}
+
+blockquote h2, 
+.entry blockquote h2 {
+	padding-top: 0;
+}
+
+.entry blockquote {
+	text-align: left;	
+	font-size: 18px; font-size: 1.8rem;
+	line-height: 26px; line-height: 2.6rem;
+	padding: 0 0 0 36px; padding-left: 3.6rem;
+	position: relative;
+	margin: 24px 0; margin: 2.4rem 0;	
+	clear: both;
+}
+
+.entry blockquote *:last-child {
+	margin-bottom: 0;
+}
+
+.entry blockquote:before {
+	content: "\201C";
+	position: absolute;
+	top: 0;
+	left: 0;
+	font: 68px Georgia, 'Times New Roman', Times, serif; font-size: 6.8rem;
+	margin-top: -10px; margin-top: -1rem;
+}
+
+.entry blockquote.float_left,
+.entry blockquote.float_right {
+	max-width: 300px;
+	width: 50%;
+}
+
+.entry blockquote.float_left {
+	margin-right: 30px; margin-right: 3rem;		
+}
+
+.entry blockquote.float_right {
+	margin-left: 30px; margin-left: 3rem;	
+}
+
+.entry h2 {
+	font-size: 24px; font-size: 2.4rem;	
+}
+
+#header {
+	text-align: center;	
+}
+
+#site_title,
+#page_title h1,
+#page_title h2 {
+	text-shadow: none;		
+}
+
+.section_label, 
+.widget_title {
+	font-size: 14px; font-size: 1.4rem;
+	text-align: center;
+	text-transform: uppercase;
+	background-repeat: no-repeat;
+	height: 62px; height: 6.2rem;
+	padding-top: 0;
+}
+
+.section_label {	
+	line-height: 56px; line-height: 5.6rem;
+	margin: -4px auto 1.3em auto;
+	width: 186px; width: 18.6rem;		
+}
+
+.widget_title {
+	line-height: 55px; line-height: 5.5rem;
+	margin: 0 auto 10px; margin-bottom: 1rem;
+	width: 180px; width: 18rem;
+}
+
+.widget.panel .widget_title {
+	position: relative;
+	bottom: 3px; bottom: 0.3rem;
+}
+
+p {
+	margin-bottom: 13px;
+}
+
+.no_margin {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+strong {
+	font-weight: bold;
+}
+
+/* Links */
+a {	
+	text-decoration: none;
+	cursor: pointer;
+	padding-bottom: 1px;
+	border-bottom: 1px solid transparent;
+}
+
+.panel a {
+	font-weight: bolder;
+}
+
+#primary_nav a {
+	font-weight: 300 !important;
+}
+
+.post_header a {
+	font-weight: 400 !important;
+}
+
+a.bordered {	
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+}
+
+a.read_more {
+	cursor: pointer;
+	display: block;
+	text-align: center;
+	font-style: italic;
+	margin-top: 0;
+	font-weight: 400 !important;
+}
+
+a.read_more:hover {
+	border-bottom-color: transparent !important;
+}
+
+#primary_nav a,
+#page_title a,
+.post_header a, 
+a.no_hover, 
+.gallery a, 
+.social a, 
+#footer a,
+.photo_widget a, 
+.album a, 
+.widget_gallery a {
+	border: none;
+	padding-bottom: 0;
+}
+
+.pagination a {
+	font-style: italic;	
+}
+
+.post_meta a {
+	font-weight: 400 !important;
+}
+
+/* Lists */
+ul, 
+ol {
+	margin: 0 0 13px 36px; margin: 0 0 1.3rem 3.6rem;
+}
+
+ul {
+	list-style-type: disc;
+}
+
+ol {
+	list-style-type: decimal;	
+}
+
+ul.horizontal,
+ul.icons {
+	list-style-type: none;
+	list-style-image: none;
+}
+
+ul.horizontal {
+	float: left;
+	overflow: hidden;
+	margin-left: 0;	
+}
+
+ul.horizontal li {
+	float: left;
+	margin-right: 2em;
+}
+
+ul.horizontal li:last-child {
+	margin-right: 0;
+}
+
+ul.icons {
+	margin-left: 14px; margin-left: 1.4rem;
+}
+
+ul.icons i {
+	margin-right: 4px; margin-right: 0.4rem;
+	font-size: 0.85em;
+}
+
+.centered {
+	text-align: center;
+}
+
+#primary_nav ul, 
+ul.posts_widget, 
+.rslides_tabs, 
+.gallery,
+ul.comments_list,
+.comment_replies,
+.connect ul, 
+ul.centered,
+.widget_gallery {
+	margin-left: 0;
+	list-style-type: none;
+}
+
+.connect ul {
+	margin-bottom: 0;
+	float: none;
+}
+
+/* Ampersands */
+.ampersand {
+	display: inline-block;
+	text-indent: -9999px;
+}
+
+#site_title .ampersand, 
+.ampersand.large {
+	width: 41px;
+	height: 31px;
+}
+
+#footer .ampersand,
+.ampersand.small {	
+	width: 33px;
+	height: 24px;
+}
+
+/* Code blocks */
+pre {
+	margin-bottom: 13px;
+}
+
+code {
+	font-family: 'Courier New', Courier, monospace;	
+}
+
+
+/* Backgrounds -- defines repeats and positions
+-----------------------------------*/
+
+/* horizontally repeated, bottom */
+#primary_nav ul,
+.comments_section > header h3,
+.comment, 
+.underline {
+	background-repeat: repeat-x;
+	background-position: bottom left;	
+}
+
+/* horizontally repeated, top */
+#primary_nav .sub_menu a,
+#primary_nav .sub_menu a:hover,
+#primary_nav .current .sub_menu a,
+.comment_replies .comment, 
+#pre_footer,
+.waves,
+.home #site_title, 
+.overline {
+	background-repeat: repeat-x;
+	background-position: top left;	
+}
+
+/* horizontally repeated, vertically centered */
+hr,
+.double_dotted, 
+#page_title {
+	background-repeat: repeat-x;
+	background-position: 0 50%;
+}
+
+/* not repeated */
+.widget .widget_title,
+#site_title .ampersand, 
+.ampersand.large,
+.home #site_title:before,
+.home #site_title:after {
+	background-repeat: no-repeat;
+}
+
+/* not repeated, horizontally centered at bottom */
+#main,
+.widget.photo_widget,
+.widget,
+.gallery li:after, 
+.image_shadow:after {
+	background-repeat: no-repeat;
+	background-position: bottom center;
+}
+
+/* not repeated, horizontally centered at top */
+#header h3,
+#site_title {
+	background-repeat: no-repeat;
+	background-position: top center;
+}
+
+/* repeated in both directions */
+.panel,
+div.pp_default .pp_content,
+#cboxContent,
+#colorbox {
+	background-repeat: repeat !important;
+}
+
+/* no background */
+.home #pre_footer {
+	background: none;
+}
+
+/* Utilities 
+-----------------------------------*/
+
+/* Alignment */
+
+.align_left {
+	text-align: left;
+}
+
+.align_right {
+	text-align: right;
+}
+
+.align_center {
+	text-align: center;
+}
+
+/* Floating */
+
+.float_left {
+	float: left;
+}
+
+.float_right {
+	float: right;
+}
+
+/* Double dotted lines */
+.double_dotted, 
+#page_title {		
+	text-align: center;	
+}
+
+.double_dotted h4 {
+	display: inline-block;
+	padding: 0 10px;
+	margin: 0;
+	line-height: 24px; line-height: 2.4rem;
+	font-size: 20px; font-size: 2rem;
+}
+
+/* Miscellaneous */
+
+hr {
+	border: none;
+	margin: 13px 0 26px; margin: 1.3rem 0 2.3rem;
+	float: left;
+	width: 100%;
+	height: 5px;
+}
+
+hr.sharp {	
+	background-image: none;
+	height: 1px;
+}
+
+.intro {
+	font-size: 16px; font-size: 1.6rem;
+	line-height: 23px; line-height: 2.3rem;
+}
+
+
+/* Transitions
+-----------------------------------*/
+a, 
+input, 
+textarea, 
+.submit {
+	transition: all ease 500ms;
+	-moz-transition: all ease 500ms;
+	-webkit-transition: all ease 500ms;
+	-o-transition: all ease 500ms;
+}
+
+/* Forms
+-----------------------------------*/
+.panel.form {
+	padding: 0 5% 39px; padding-bottom: 3.9rem;
+	width: 90%;
+}
+
+.form_message {
+	font-weight: bold;
+	padding: 20px 0;
+}
+
+.form_message p:last-child {
+	margin-bottom: 0;
+}
+
+label {
+	float: left;
+	position: relative;
+	line-height: 29px; line-height: 2.9rem;
+	font-weight: bolder;
+}
+
+input,
+textarea {
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 0;	
+	padding: 7px 6px; padding: 0.7rem 0.6rem;
+	font-size: 13px; font-size: 1.3rem;
+	overflow: hidden;
+	margin: 0 0 10px; margin-bottom: 1rem;
+	width: 95%;
+	outline: 0;
+	float: left;
+}
+
+input {
+	margin-right: 10px; margin-right: 1rem;
+}
+
+fieldset input {
+	margin-bottom: 6px; margin-bottom: 0.6rem;
+}
+
+textarea {
+	height: 143px; height: 14.3rem;
+}
+
+input[type=checkbox],
+input[type=radio] {
+	min-width: 14px;
+	width: auto !important;	
+	height: 13px; height: 1.3rem;	
+	margin: 8px 4px 0 0; margin: 0.8rem 0.4rem 0 0;
+	padding: 0;
+	border: none !important;		
+}
+
+.submit.large {	
+	width: 150px; width: 15rem;
+}
+
+.submit,
+.submit.small {	
+	width: 80px; width: 8rem;
+}
+
+.submit {	
+	border-radius: 3px;
+	font-weight: bold;
+	font-size: 13px; font-size: 1.3rem;
+	text-align: center;	
+	padding: 6px 0 7px; padding: 0.6rem 0 0.7rem;
+}
+
+.submit:hover {
+    cursor: pointer; 
+}
+
+.required label:after {
+	content:"*";
+	margin-left: 4px;
+}
+
+.comment_form {
+	float: left;	
+}
+
+.comment_form div {
+	float: left; 
+	width: 100%;
+}
+
+.comment_form input {
+	width: 70%;
+}
+
+label {
+	width: 22%;
+}
+
+.form form > div input,
+.form form > div textarea {
+	width: 65%;
+	float: left;
+	position: relative;
+}
+
+.button_container {
+	width: 100%;
+	float: left; 
+	clear: both; 	
+}
+
+.button_container .submit {
+	margin-left: 22%;
+}
+
+label.fullwidth {
+	width: 100%;
+}
+
+
+/* Widgets
+-----------------------------------*/
+.widget {
+	/*margin-top: -7px;*/ /* Due to the shading at the top of the widget_title background, this is required to keep consistent vertical margins */
+	margin-bottom: 26px; margin-bottom: 2.6rem;
+	padding-bottom: 13px; padding-bottom: 1.3rem;
+	float: left;
+	position: relative;
+	width: 100%;
+}
+
+.widget.borderless {
+	margin-top: 0;
+	background: none !important;
+	border: none !important;
+}
+
+.widget.panel {
+	padding: 0 6%;
+	width: 88%;
+	margin-top: 0;
+	margin-bottom: 44px; margin-bottom: 4.4rem; /* This is 5px more than .widget to account for the waves, which add 5px of height to the panel */
+}
+
+.widget.panel:before, 
+.widget.panel:after {
+	background: none;
+}
+
+.widget.open header {
+	background-repeat: repeat-x;
+	background-position: 0 3px;
+}
+
+.widget p:last-child {
+	margin-bottom: 0;
+}
+
+.posts_widget h4 {
+	font-weight: bold !important;
+	font-size: 14px; font-size: 1.4rem;
+	line-height: 20px; line-height: 2rem;
+}
+
+.posts_widget li {	
+	overflow: hidden;
+	padding-bottom: 2px; padding-bottom: 0.2rem;
+	margin-bottom: 13px; margin-bottom: 1.3rem;
+}
+
+.widget .posts_widget li {
+	padding-bottom: 13px; padding-bottom: 1.3rem;
+}
+
+.posts_widget li:last-child {
+	border: none;
+	margin-bottom: 0;
+}
+
+ul.tweets,
+.tweet {
+	margin-bottom: 0;	
+}
+
+.photo_widget a {
+	display: block;
+	line-height: 0;
+}
+
+.widget_gallery {
+	padding-top: 6px; padding-top: 0.6rem;
+}
+
+.widget_gallery li {
+	float: left;
+	margin: 0 14px 14px 0; margin: 0 1.4rem 1.4rem 0;
+	width: 60px;
+	height: 60px;
+} 
+
+.widget_gallery li:nth-child(4n+4) {
+	margin-right: 0;
+}
+
+@media all and (max-width : 950px) {
+	.widget_gallery li:nth-child(4n+4) {
+		margin-right: 14px; margin-right: 1.4rem;
+	}
+}
+
+@media all and (max-width : 760px) {
+	.widget_gallery li:nth-child(3n+3) {
+		margin-right: 0;
+	}
+}
+
+@media all and (max-width : 710px) {
+	.widget_gallery li:nth-child(3n+3) {
+		margin-right: 14px; margin-right: 1.4rem;
+	}
+}
+
+.fetch li {
+	display: none;
+}
+
+.fetched li {
+	display: block;
+}
+
+/* Google Map
+-----------------------------------*/
+.google_map {
+	width: 100%;
+	height: 277px; height: 27.7rem;
+	margin-bottom: 16px; margin-bottom: 1.6rem;
+}
+
+.column_33 .google_map {
+	height: 154px; height: 15.4rem;
+}
+
+.column_66 .google_map {
+	height: 215px; height: 21.5rem;
+}
+
+.column_50 .google_map {
+	height: 166px; height: 16.6rem;
+}
+
+.google_map img {
+	box-shadow: none !important;
+	-moz-box-shadow: none !important;
+}
+
+.google_map {
+	box-shadow: 0 0 5px #333;
+}
+
+/* Slider
+-----------------------------------*/
+#slider {
+	position: relative;
+}
+
+.rslides {
+	position: relative;
+  	list-style: none;
+  	overflow: hidden;
+  	width: 100%;
+  	padding: 0;
+  	margin: 0;
+}
+
+.rslides li {
+	position: absolute;
+	display: none;
+	width: 100%;
+	left: 0;
+	top: 0;
+}
+
+.rslides li:first-child {
+	position: relative;
+	display: block;
+	float: left;
+}
+
+.rslides img {
+	display: block;
+	height: auto;
+	float: left;
+	border: 0;
+}
+
+.rslides_tabs {
+	position: absolute;
+	top: 1em;
+	left: 50%;
+	width: auto;
+}
+
+.rslides_tabs li {
+	width: 8px;
+	height: 8px;
+	border-radius: 8px;
+	-moz-border-radius: 8px;	
+	float: left;
+	margin-left: 8px;
+	position: relative;
+	right: 50%;
+}
+
+.rslides_tabs li a {
+	color: transparent;		
+	border: none;
+}
+
+/* Gallery & Images
+-----------------------------------*/
+
+img {
+	width: 100%;
+}
+
+/* Gallery */
+
+.gallery {
+	float: left;		
+	margin-bottom: 0;
+	position: relative;
+	z-index: 3;
+	width: 100%;
+}
+
+.gallery img {
+	position: relative;
+	z-index: 3;
+}
+
+.gallery li {
+	float: left;
+	margin-right: 3%;
+}
+
+.gallery a {
+	border: none;
+	position: relative; 
+	z-index: 2;
+	display: block;
+	width: 100%;
+	height: 100%;
+	line-height: 0;
+}
+
+/* Carousel */
+
+.carousel.large li:nth-child(2n+2),
+.carousel.medium li:nth-child(4n+4),
+.carousel.thumbnails li:nth-child(6n+6) {
+	margin-right: 3%;
+}
+
+.carousel_viewport {
+	padding: 10px 10px 0 10px; padding: 1rem 1rem 0 1rem; /* This is required for box-shadow to be visible */
+	margin: -10px 0 0 -10px; margin: -1rem 0 0 -1rem; /* Vertical & horizontal correction for top padding */
+}
+
+.carousel_wrapper {
+	float: left;
+}
+
+.carousel li {
+	padding-bottom: 0 !important;
+}
+
+.carousel_next a,
+.carousel_previous a {
+	border: none;
+	display: block;
+	width: 20px;
+	height: 39px;
+}
+
+.carousel_next a {
+	margin-left: 16px;
+}
+
+.carousel_previous a {
+	margin-right: 16px;
+}
+
+/* Photo album sets */  
+
+.panel.album h3 {
+	text-align: center;
+	margin-top: 10px; margin-top: 1rem;
+}
+
+/* Image styles */
+
+.image_shadow {
+	display: block;
+	line-height: 0;
+}
+
+.gallery li:after, 
+.image_shadow:after {
+	content: "";
+	float: left;
+	width: 100%;
+}
+
+.widget.panel .image_shadow:after,
+.panel.album .image_shadow:after {
+	height: 25px;
+}
+
+.pp_pic_holder a {
+	border: none;
+}
+
+.media_widget img {
+	width: 100%;	
+	margin-bottom: 0 !important;
+}
+
+figure {
+	display: block; 
+	position: relative; 
+	float: left;
+	margin: 0;
+}
+
+figcaption {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px 0; padding: 1rem 0;
+	width: 90%;
+	margin: 0 5%;
+	background-position: 5% 100%;
+	background-repeat: repeat-x;
+	z-index: 5;
+	text-align: center;
+	opacity: 0;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; /* IE 8 */
+	filter: alpha(opacity=0); /* IE 5 - 7 */
+}
+
+figure:hover figcaption {
+	opacity: 1;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; /* IE 8 */
+	filter: alpha(opacity=100);
+}
+
+/* Navigation 
+-----------------------------------*/
+#primary_nav {
+	z-index: 1000;
+	width: 100%;
+}
+
+/* Header
+-----------------------------------*/
+#header {
+	position: relative;	
+	margin-top: 2px; margin-top: 0.2rem;
+	background-repeat: no-repeat;
+	background-position: 50% 210px;
+}
+
+#header hgroup {
+	position: absolute;
+	bottom: 40px; bottom: 4rem;
+	z-index: 900;
+	left: 50%;
+	min-width: 55%;
+}
+
+#site_title {
+	width: 100%;
+	padding: 52px 0; padding: 5.2rem 0;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.home #site_title,
+#header h3 {
+	position: relative;
+	right: 50%;
+	white-space: nowrap;
+	width: auto;
+	margin-bottom: 0;
+}
+
+.home #site_title:before,
+.home #site_title:after {
+	content: "";
+	position: absolute;
+	top: 0;
+}
+
+#header h3 {
+	font-weight: 100 !important;
+	font-size: 18px; font-size: 1.8rem;
+}
+
+#page_title {
+	margin: 27px 0 48px; margin: 2.7rem 0 4.8rem;
+}
+
+#page_title h1,
+#page_title h2 {
+	display: inline;
+	background-repeat: repeat-x;
+	padding: 22px 0 27px; padding: 2.2rem 0 2.7rem;
+	position: relative;
+}
+
+#page_title h1:before,
+#page_title h1:after,
+#page_title h2:before,
+#page_title h2:after {
+	background-repeat: no-repeat;
+	content: "";
+	display: block;	
+	position: absolute;
+	top: 0;
+}
+
+#page_title h1:before,
+#page_title h2:before {
+	left: 0;
+}
+
+#page_title h1:after,
+#page_title h2:after {
+	right: 0;
+}
+
+/* Footer
+-----------------------------------*/
+#pre_footer {
+	padding: 39px 0; padding: 3.9rem 0;	
+	float: left;
+	width: 100%;
+}
+
+#footer {
+	position: relative;
+	padding-top: 13px; padding-top: 1.3rem;
+}
+
+.connect {
+	line-height: 27px; line-height: 2.7rem;
+}
+
+.connect h4 {
+	line-height: 18px; line-height: 1.8rem;
+	padding-top: 2px; padding-top: 0.2rem;
+	margin-bottom: 0;
+	font-style: italic;
+}
+
+.connect {
+	text-align: center;
+}
+
+.connect > div,
+.connect > h4,
+.connect > ul,
+.connect > span {
+	display: inline-block;
+    *display: inline; /* IE 6&7 hack */
+    margin-right: 15px; margin-right: 1.5rem;	
+    vertical-align: top;
+}
+
+ul.social li {
+	margin-right: 0 !important;
+}
+
+.social_button {
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;	
+	width: 27px; width: 2.7rem;
+	height: 27px; width: 2.7rem;
+	background-repeat: no-repeat;
+	display: block;
+	float: left;
+	margin-left: 8px; margin-left: 0.8rem;
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+}
+
+#footer .bottom {
+	float: left;
+	width: 100%;
+	font-size: 10px; font-size: 1rem;
+	padding: 19px 0 27px; padding: 1.9rem 0 2.7rem;
+}
+
+.osfa {
+	text-indent:100%;
+	white-space: nowrap;
+	overflow: hidden;
+	height: 26px; width: 2.6rem;
+	width: 26px; height: 2.6rem;
+	display: inline-block;
+	background: url(../images/osfa_logo.png) no-repeat;
+	position: relative;
+	vertical-align: middle;
+}
+
+/* Posts
+-----------------------------------*/
+.post,
+.form {
+	margin-bottom: 39px; margin-bottom: 3.9rem;
+	float: left;
+}
+
+.post.panel,
+.form.panel {
+	padding: 0;
+	margin-bottom: 47px; margin-bottom: 4.7rem;
+	width: 100%;
+}
+
+.post.panel > header,
+.form.panel > header,
+.post.panel .entry,
+.form.panel .entry {
+	width: 90%;
+}
+
+.post.panel > header,
+.form.panel > header {
+	padding: 0 5%;
+}
+
+.post_header {
+	padding: 13px 0; padding: 1.3rem 0;
+	margin-bottom: 0;
+	text-align: center;
+}
+
+#posts .post:last-child {
+	background: none;
+}
+
+.entry {
+	padding: 26px 5%; padding: 2.6rem 5%;	
+}
+
+.entry {
+	overflow: hidden;
+	position: relative;
+}
+
+.post .entry:after {
+	content: "";
+	width: 90%;
+	margin-left: 5%;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 1px;	
+}
+
+.quote .entry:after {
+	width: 100%;
+	margin-left: 0;
+}
+
+.post_header,
+.entry:after,
+.post {
+	background-repeat: repeat-x;
+	background-position: bottom;
+}
+
+.entry.no_meta:after {
+	background-image: none !important;
+}
+
+.post_meta,
+.post_date,
+.comments,
+.tags, 
+.time_ago,
+.comment_meta {
+	font-size: 10px; font-size: 1rem;
+}
+
+.post_meta {
+	position: relative;
+	left: 50%;
+	text-align: center;
+	padding: 6px 0; padding: 0.6rem 0;
+	float: left;
+}
+
+.post_meta > div {	
+	position: relative;
+	right: 50%;
+	display: inline-block;
+	padding: 9px 12px; padding: 0.9rem 1.2rem;
+	background-repeat: repeat-y;
+	background-position: top right;	
+}
+
+.post_meta > div:last-child,
+.panel .post_meta > div:last-child {
+	background: none;
+}
+
+.quote .stated_by {	
+	font-size: 14px; font-size: 1.4rem;
+	text-align: center;
+	margin-bottom: 13px; margin-bottom: 1.3rem;
+}
+
+.quote .stated_by:before {
+	content: "\2014";
+	margin-right: 4px;
+}
+
+#posts .post:last-child {
+	margin-bottom: 0;
+}
+
+.pagination {
+	background-repeat: repeat-x;
+	background-position: top;
+	overflow: hidden;
+	padding: 13px 0 39px; padding: 1.3rem 0 3.9rem;
+	float: left;
+	width: 100%;
+}
+
+.pagination .float_left {
+	margin-left: 1px;
+}
+
+.pagination .float_right {
+	margin-right: 1px;
+}
+
+/* Media posts */
+.post.media img {
+	margin-bottom: 0 !important;
+}
+
+.post.media .post_meta {
+	padding: 0;
+	margin-top: -26px;
+}
+
+.post.media .post_meta > div {
+	bottom: 6px;
+}
+
+/* Comments
+-----------------------------------*/
+.comments_section {
+	float: left;	
+}
+
+.comments_section h3 {
+	padding-bottom: 13px; padding-bottom: 1.3rem;
+	margin-bottom: 0;
+}
+
+.comment {
+	position: relative;
+	float: left;
+	width: 100%;
+	padding: 26px 0; padding: 2.6rem 0;
+}
+
+.gravatar {
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	top: 28px; top: 2.8rem;
+	left: 0;	
+	box-shadow: none;
+	-moz-box-shadow: none;
+}
+
+.comment_details {
+	float: left;
+	margin-left: 66px; margin-left: 6.6rem;
+}
+
+.comment_author {
+	margin-bottom: 0;
+}
+
+.comment_meta {
+	float: left;
+	width: 100%;
+	margin-bottom: 13px; margin-bottom: 1.3rem;
+}
+
+.comment_date {
+	background-repeat: repeat-y;
+	background-position: right;
+	padding-right: 12px; padding-right: 1.2rem;
+	margin-right: 8px; margin-right: 0.8rem;
+}
+
+.comment_meta span {
+	float: left;
+	display: block;
+	line-height: 26px; line-height: 2.6rem;
+}
+
+.comment_text p:last-child {
+	margin-bottom: 0;
+}
+
+.comment_replies {
+	float: left;
+	margin-left: 66px; margin-left: 6.6rem;
+}
+
+.comment_replies .comment {
+	padding-bottom: 0;
+	margin-top: 26px; margin-top: 2.6rem;
+}
+
+.comment_form h3 {
+	padding: 26px 0 13px; padding: 2.6rem 0 1.3rem;
+}
