@@ -282,11 +282,19 @@ var Wedding = (window.Wedding = window.Wedding || {});
         filterLisa: function(evt) {
             evt.stopPropagation();
             this.collection.trigger('filterLisa');
+            this.$("ul.nav-list li").removeClass('active');
+            this.$("ul.nav-list .filter-lisa").parent().addClass('active');
+
+
             return false;
         },
         filterRyan: function(evt) {
             evt.stopPropagation();
             this.collection.trigger('filterRyan');
+            this.$("ul.nav-list li").removeClass('active');
+            this.$("ul.nav-list .filter-ryan").parent().addClass('active');
+
+
             return false;
         },
         filterAll: function() {
@@ -312,21 +320,33 @@ var Wedding = (window.Wedding = window.Wedding || {});
         filterAdults: function(evt) {
             evt.stopPropagation();
             this.collection.trigger('filterAdults');
+            this.$("ul.nav-list li").removeClass('active');
+            this.$("ul.nav-list .filter-adults").parent().addClass('active');
             return false;
         },
         filterChildren: function(evt) {
             evt.stopPropagation();
             this.collection.trigger('filterChildren');
+            this.$("ul.nav-list li").removeClass('active');
+            this.$("ul.nav-list .filter-children").parent().addClass('active');
+
+
             return false;
         },
         filterToddlers: function(evt) {
             evt.stopPropagation();
             this.collection.trigger('filterToddlers');
+            this.$("ul.nav-list li").removeClass('active');
+            this.$("ul.nav-list .filter-toddlers").parent().addClass('active');
+
             return false;
         },
         filterInfants: function(evt) {
             evt.stopPropagation();
             this.collection.trigger('filterInfants');
+            this.$("ul.nav-list li").removeClass('active');
+            this.$("ul.nav-list .filter-infants").parent().addClass('active');
+
             return false;
         },
         renderPeopleList: function() {
