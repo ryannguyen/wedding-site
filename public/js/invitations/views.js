@@ -38,6 +38,10 @@ var Wedding = (window.Wedding = window.Wedding || {});
 
                     _this.people.add(p.attributes);
 
+                    if(p.attributes.type == "infant" || p.attributes.type == "Infant")
+                        return;
+
+                    console.log(p.attributes.type);
                     switch(attr.response) {
                         case 'y':
                             _this.people.attending = _this.people.attending + 1;
@@ -267,7 +271,7 @@ var Wedding = (window.Wedding = window.Wedding || {});
         },
         render: function() {
             this.$el.html(this.template({
-                all: this.collection.length,
+                all: this.collection.attending+this.collection.notAttending+this.collection.noResponse,
                 attending: this.collection.attending,
                 notAttending: this.collection.notAttending,
                 noResponse: this.collection.noResponse
