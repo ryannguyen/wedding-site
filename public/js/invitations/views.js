@@ -316,8 +316,27 @@ var Wedding = (window.Wedding = window.Wedding || {});
             this.collection.on('reset', this.renderPeopleList);
         },
         render: function() {
+            var options = {
+                ryanCount: 0,
+                lisaCount: 0
+            };
+
+            window.App.invitations.each(function(invitation) {
+                var count = 0;
+                invitation.people.each(function(p) {
+                    if(p.get('type') != "infant" && p.get('type') != "Infant")
+                        count = count + 1;
+                });
+
+                if(invitation.get('side') == 'ryan') {
+                    options.ryanCount = options.ryanCount + count;
+                } else {
+                    options.lisaCount = options.lisaCount + count;
+                }
+            });
+
             this.collection.count();
-            this.$el.html(this.template(this.collection.getCount()));
+            this.$el.html(this.template( _.extend(options, this.collection.getCount())));
             this.renderPeopleList();
 
             return this;
