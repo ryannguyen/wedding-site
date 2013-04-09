@@ -50,7 +50,14 @@ var Wedding = (window.Wedding = window.Wedding || {});
     });
 
     App.People = Backbone.Collection.extend({
-        model: App.Person
+        model: App.Person,
+        attending: 0,
+        notAttending: 0,
+        noResponse: 0,
+        comparator: function(model) {
+            return model.get('name').toLowerCase();
+        },
+
     });
 
 })(Wedding);

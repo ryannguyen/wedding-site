@@ -1,0 +1,11 @@
+<script type="text/template" id="invitation-template">
+    <h2>{{label}}</h2>
+    <ul>
+        {{#each people}}
+        <li>{{this.name}} - {{this.type}} - {{#if response}}{{response}}{{else}}Not Yet Responded{{/if}}</li>
+        {{/each}}
+    </ul>
+
+    <h2>Comments</h2>
+    <div>{{comments}}</div>
+</script>

@@ -29,8 +29,12 @@ var Wedding = (window.Wedding = window.Wedding || {});
         _setPeople: function() {
             var people = [];
             this.people.each(function(person) {
-                people.push(person.attributes);
+                var attr = person.attributes;
+                if(attr.invitation)
+                    delete attr.invitation
+                people.push(attr);
             });
+
 
             this.set('people', people);
             return this;

@@ -1,0 +1,35 @@
+<script type="text/template" id="people-template">
+<div class="row-fluid">
+        <div class="span9">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th style="width: 100px">Type</th>
+                        <th style="width: 40px">R</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div><!--/span-->
+
+        <div class="span3">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Sidebar</li>
+                    <li class="active"><a href="#" class="filter-all">All - {{all}}</a></li>
+                    <li><a href="#" class="filter-attending">Attending - {{attending}}</a></li>
+                    <li><a href="#" class="filter-declined">Not Attending - {{notAttending}}</a></li>
+                    <li><a href="#" class="filter-no-response">Has Not Responded - {{noResponse}}</a></li>
+                </ul>
+            </div><!--/.well -->
+        </div><!--/span-->
+    </div><!--/row-->
+</script>
+
+<script type="text/template" id="people-row-template">
+    <td><a href="#" class="show">{{ name }}</a></td>
+    <td>{{type}}</td>
+    <td>{{response}}</td>
+</script>

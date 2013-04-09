@@ -104,8 +104,12 @@ $(function() {
             });
         },
         set_lodging: function() {
+            if(this.model.get('lodging') == null || this.model.get('lodging') == undefined) {
+                this.model.set('lodging', 1);
+                return;
+            }
+
             this.model.set('lodging', (this.model.get('lodging') == 0 ? 1 : 0));
-            console.log(this.model.get('lodging'));
         }
     });
 

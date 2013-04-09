@@ -1,0 +1,43 @@
+<script type="text/template" id="edit-invitation-template">
+<fieldset>
+    <legend class="header">Edit Invitation Details</legend>
+    <label>Invitation Label</label>
+    <input id="invitation-label" type="text" placeholder="Serenity Crew" name="invitation[label]" value="{{label}}">
+
+    <label>Address</label>
+    <textarea rows="4" class='input-xlarge' id="invitation-address" name="invitation[address]">{{address}}</textarea>
+
+    <label>Guests Of</label>
+    <select id="invitation-side" class="span2" name="invitation[side]">
+        <option class="lisa" value="lisa">Lisa</option>
+        <option class="ryan" value="ryan">Ryan</option>
+    </select>
+
+    <br />
+    <br />
+
+    <legend>Add Invitees</legend>
+
+    <br />
+
+    <div class="controls-row">
+        <input class="span3" id="invitee-name" type="text" placeholder="Malcolm Reynolds">
+        <select class="span2" id="invitee-type">
+            <option value="adult">Adult</option>
+            <option value="child">Child</option>
+            <option value="infant">Infant</option>
+            <option value="toddler">Toddler</option>
+        </select>
+
+        <button class="btn btn-small span1 add-invitee-btn">Add</button>
+    </div>
+
+    <ul id="invitees">
+    </ul>
+</fieldset>
+
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary save">Save</button>
+    <button type="button" class="btn cancel">Cancel</button>
+</div>
+</script>
