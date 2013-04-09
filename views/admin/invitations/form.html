@@ -47,5 +47,13 @@
 </script>
 
 <script type="text/template" id="invitee-item-template">
-    <span>{{ name }} - {{ type }} <a href="#">remove</a></span>
+    <span>
+        <a href="#" class="remove">remove</a>
+        {{ name }} - {{ type }}
+        {{#if response}}
+            <a href="#" class="response">{{response}}</a>
+        {{else}}
+            <a href="#" class="response">no response</a></span>
+        {{/if}}
+    </span>
 </script>

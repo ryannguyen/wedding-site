@@ -16,6 +16,7 @@ var Wedding = (window.Wedding = window.Wedding || {});
             this.people = new App.People;
 
             this.invitations.on('reset', this.resetPeople);
+            this.invitations.on('change', this.resetPeople);
             this.invitations.on('edit', this.editInvitation);
 
             this.listenTo(App._events, 'showInvitations', this.showInvitations);
@@ -34,24 +35,8 @@ var Wedding = (window.Wedding = window.Wedding || {});
             this.invitations.each(function(i) {
                 i.people.each(function(p) {
                     var attr = p.attributes;
-                    attr.invitation = i.attributes;
-
+                    attr.invitation = i.id;
                     _this.people.add(p.attributes);
-
-                    if(p.attributes.type == "infant" || p.attributes.type == "Infant")
-                        return;
-
-                    console.log(p.attributes.type);
-                    switch(attr.response) {
-                        case 'y':
-                            _this.people.attending = _this.people.attending + 1;
-                            break;
-                        case 'n':
-                            _this.people.notAttending = _this.people.notAttending + 1;
-                            break;
-                        default:
-                            _this.people.noResponse = _this.people.noResponse + 1;
-                    };
                 });
             });
         },
@@ -238,22 +223,34 @@ var Wedding = (window.Wedding = window.Wedding || {});
         tagName: 'li',
         template: Handlebars.compile($('#invitee-item-template').html()),
         events: {
-            'click a' : 'removeInvitee'
+            'click a.remove' : 'removeInvitee',
+            'click a.response': 'toggleResponse'
         },
         render: function() {
             var type = this.model.get('type').substr(0,1).toUpperCase()
                         +  this.model.get('type').substr(1);
             this.$el.html(
-                this.template({
-                    name: this.model.get('name'),
-                    type: type
-                })
+                this.template(this.model.attributes)
             );
+
             return this;
         },
         removeInvitee: function() {
             this.collection.remove(this.model);
             this.remove();
+        },
+        toggleResponse: function(evt) {
+            evt.stopPropagation();
+
+            if(this.model.get('response') == 'y') {
+                this.model.set('response', 'n');
+            } else {
+                this.model.set('response', 'y');
+            }
+
+            this.$('a.response').html(this.model.get('response'));
+
+            return false;
         }
     });
 
@@ -263,19 +260,19 @@ var Wedding = (window.Wedding = window.Wedding || {});
             "click a.filter-all":"filterAll",
             "click a.filter-attending":"filterAttending",
             "click a.filter-declined":"filterNotAttending",
-            "click a.filter-no-response":"filterNoResponse"
+            "click a.filter-no-response":"filterNoResponse",
+            "click a.filter-adults":"filterAdults",
+            "click a.filter-children":"filterChildren",
+            "click a.filter-toddlers":"filterToddlers",
+            "click a.filter-infants":"filterInfants"
         },
         initialize: function() {
             _.bindAll(this, 'renderPeopleList');
             this.collection.on('reset', this.renderPeopleList);
         },
         render: function() {
-            this.$el.html(this.template({
-                all: this.collection.attending+this.collection.notAttending+this.collection.noResponse,
-                attending: this.collection.attending,
-                notAttending: this.collection.notAttending,
-                noResponse: this.collection.noResponse
-            }));
+            this.collection.count();
+            this.$el.html(this.template(this.collection.getCount()));
             this.renderPeopleList();
 
             return this;
@@ -300,11 +297,31 @@ var Wedding = (window.Wedding = window.Wedding || {});
             this.$("ul.nav-list li").removeClass('active');
             this.$("ul.nav-list .filter-no-response").parent().addClass('active');
         },
+        filterAdults: function(evt) {
+            evt.stopPropagation();
+            this.collection.trigger('filterAdults');
+            return false;
+        },
+        filterChildren: function(evt) {
+            evt.stopPropagation();
+            this.collection.trigger('filterChildren');
+            return false;
+        },
+        filterToddlers: function(evt) {
+            evt.stopPropagation();
+            this.collection.trigger('filterToddlers');
+            return false;
+        },
+        filterInfants: function(evt) {
+            evt.stopPropagation();
+            this.collection.trigger('filterInfants');
+            return false;
+        },
         renderPeopleList: function() {
             var _this = this;
 
             this.collection.each(function(p) {
-                var view = new App.PeopleTableRow({ model: p });
+                var view = new App.PeopleTableRow({ model: p, collection: _this.collection});
                 _this.$('tbody').append( view.render().el );
             });
         }
@@ -317,18 +334,51 @@ var Wedding = (window.Wedding = window.Wedding || {});
             "click a.show":"showInvitation"
         },
         initialize: function() {
-            _.bindAll(this, 'filterPeopleAll', 'filterPeopleAttending', 'filterPeopleNotAttending', 'filterPeopleNoResponse');
+            _.bindAll(this, 'filterPeopleAll', 'filterPeopleAttending', 'filterPeopleNotAttending', 'filterPeopleNoResponse',
+                        'filterAdults', 'filterChildren', 'filterToddlers', 'filterInfants');
             this.listenTo(App._events, "filterPeopleAll", this.filterPeopleAll);
             this.listenTo(App._events, "filterPeopleAttending", this.filterPeopleAttending);
             this.listenTo(App._events, "filterPeopleNotAttending", this.filterPeopleNotAttending);
             this.listenTo(App._events, "filterPeopleNoResponse", this.filterPeopleNoResponse);
+            this.collection.on("filterAdults", this.filterAdults);
+            this.collection.on("filterChildren", this.filterChildren);
+            this.collection.on("filterToddlers", this.filterToddlers);
+            this.collection.on("filterInfants", this.filterInfants);
 
         },
         showInvitation: function(evt) {
             evt.stopPropagation();
-            var invitation = window.App.invitations.get(this.model.get('invitation')._id);
+            var invitation = window.App.invitations.get(this.model.get('invitation'));
             invitation.collection.trigger('edit', invitation);
             return false;
+        },
+        filterAdults: function() {
+            if(this.model.get('type') == 'adult') {
+                this.$el.show();
+            } else {
+                this.$el.hide();
+            }
+        },
+        filterChildren: function() {
+            if(this.model.get('type') == 'child') {
+                this.$el.show();
+            } else {
+                this.$el.hide();
+            }
+        },
+        filterToddlers: function() {
+            if(this.model.get('type') == 'toddler') {
+                this.$el.show();
+            } else {
+                this.$el.hide();
+            }
+        },
+        filterInfants: function() {
+          if(this.model.get('type') == 'infant' || this.model.get('type') == 'Infant' ) {
+                this.$el.show();
+            } else {
+                this.$el.hide();
+            }
         },
         filterPeopleAll: function() {
             this.$el.show();
