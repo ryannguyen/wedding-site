@@ -56,9 +56,41 @@ var Wedding = (window.Wedding = window.Wedding || {});
 
     App.InvitationsView = Backbone.View.extend({
         template: Handlebars.compile($('#invitations-template').html()),
+        events: {
+            'click .filter-all':'filterAll',
+            'click .filter-ryan':'filterRyan',
+            'click .filter-lisa':'filterLisa'
+        },
         initialize: function() {
             _.bindAll(this, 'renderInvitations');
             this.collection.on('reset', this.renderInvitations);
+        },
+        filterAll: function(evt) {
+            evt.stopPropagation();
+            this.collection.trigger('filterAll');
+            this.$("ul.nav-list li").removeClass('active');
+            this.$("ul.nav-list .filter-all").parent().addClass('active');
+
+
+            return false;
+        },
+        filterLisa: function(evt) {
+            evt.stopPropagation();
+            this.collection.trigger('filterLisa');
+            this.$("ul.nav-list li").removeClass('active');
+            this.$("ul.nav-list .filter-lisa").parent().addClass('active');
+
+
+            return false;
+        },
+        filterRyan: function(evt) {
+            evt.stopPropagation();
+            this.collection.trigger('filterRyan');
+            this.$("ul.nav-list li").removeClass('active');
+            this.$("ul.nav-list .filter-ryan").parent().addClass('active');
+
+
+            return false;
         },
         render: function() {
             this.$el.html(this.template());
@@ -70,7 +102,7 @@ var Wedding = (window.Wedding = window.Wedding || {});
             var _this = this;
 
             this.collection.each(function(i) {
-                var view = new App.InvitationTableRow({ model: i });
+                var view = new App.InvitationTableRow({ model: i, collection: _this.collection });
                 _this.$('tbody').append( view.render().el );
             });
         }
@@ -85,10 +117,13 @@ var Wedding = (window.Wedding = window.Wedding || {});
             'click a.trash' : 'deleteInvitation'
         },
         initialize: function() {
+            _.bindAll(this, 'show', 'filterRyan', 'filterLisa');
             this.listenTo(this.model.collection, 'reset', this.remove);
             this.listenTo(this.model, 'change', this.render);
-            this.listenTo(App._events, 'filterInvitationsResponded', this.filterResponded);
             this.listenTo(App._events, 'showAllInvitations', this.show);
+            this.collection.on('filterAll', this.show);
+            this.collection.on('filterRyan', this.filterRyan);
+            this.collection.on('filterLisa', this.filterLisa);
         },
         render: function() {
             var obj = _.extend({ hasResponded: this.model.hasResponded()}, this.model.attributes );
@@ -119,6 +154,14 @@ var Wedding = (window.Wedding = window.Wedding || {});
         },
         filterResponded: function(evt) {
             this.model.hasResponded() ? this.$el.show() : this.$el.hide();
+            return false;
+        },
+        filterLisa: function(evt) {
+            this.model.get('side') == 'lisa' ? this.$el.show() : this.$el.hide();
+            return false;
+        },
+        filterRyan: function(evt) {
+            this.model.get('side') == 'ryan' ? this.$el.show() : this.$el.hide();
             return false;
         }
     });
