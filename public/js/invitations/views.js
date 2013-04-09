@@ -264,7 +264,9 @@ var Wedding = (window.Wedding = window.Wedding || {});
             "click a.filter-adults":"filterAdults",
             "click a.filter-children":"filterChildren",
             "click a.filter-toddlers":"filterToddlers",
-            "click a.filter-infants":"filterInfants"
+            "click a.filter-infants":"filterInfants",
+            "click a.filter-lisa":"filterLisa",
+            "click a.filter-ryan":"filterRyan"
         },
         initialize: function() {
             _.bindAll(this, 'renderPeopleList');
@@ -276,6 +278,16 @@ var Wedding = (window.Wedding = window.Wedding || {});
             this.renderPeopleList();
 
             return this;
+        },
+        filterLisa: function(evt) {
+            evt.stopPropagation();
+            this.collection.trigger('filterLisa');
+            return false;
+        },
+        filterRyan: function(evt) {
+            evt.stopPropagation();
+            this.collection.trigger('filterRyan');
+            return false;
         },
         filterAll: function() {
             App._events.trigger('filterPeopleAll');
@@ -335,7 +347,7 @@ var Wedding = (window.Wedding = window.Wedding || {});
         },
         initialize: function() {
             _.bindAll(this, 'filterPeopleAll', 'filterPeopleAttending', 'filterPeopleNotAttending', 'filterPeopleNoResponse',
-                        'filterAdults', 'filterChildren', 'filterToddlers', 'filterInfants');
+                        'filterAdults', 'filterChildren', 'filterToddlers', 'filterInfants', 'filterRyan', 'filterLisa');
             this.listenTo(App._events, "filterPeopleAll", this.filterPeopleAll);
             this.listenTo(App._events, "filterPeopleAttending", this.filterPeopleAttending);
             this.listenTo(App._events, "filterPeopleNotAttending", this.filterPeopleNotAttending);
@@ -344,6 +356,8 @@ var Wedding = (window.Wedding = window.Wedding || {});
             this.collection.on("filterChildren", this.filterChildren);
             this.collection.on("filterToddlers", this.filterToddlers);
             this.collection.on("filterInfants", this.filterInfants);
+            this.collection.on("filterRyan", this.filterRyan);
+            this.collection.on("filterLisa", this.filterLisa);
 
         },
         showInvitation: function(evt) {
@@ -399,6 +413,22 @@ var Wedding = (window.Wedding = window.Wedding || {});
         },
         filterPeopleNoResponse: function() {
             if(!this.model.get('response')) {
+                this.$el.show();
+            } else {
+                this.$el.hide();
+            }
+        },
+        filterRyan: function() {
+            var invitation = window.App.invitations.get(this.model.get('invitation'));
+            if(invitation.get('side') == 'ryan') {
+                this.$el.show();
+            } else {
+                this.$el.hide();
+            }
+        },
+        filterLisa: function() {
+            var invitation = window.App.invitations.get(this.model.get('invitation'));
+            if(invitation.get('side') == 'lisa') {
                 this.$el.show();
             } else {
                 this.$el.hide();

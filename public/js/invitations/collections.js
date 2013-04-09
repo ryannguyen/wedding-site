@@ -59,6 +59,13 @@ var Wedding = (window.Wedding = window.Wedding || {});
         },
         count: function() {
             var _this = this;
+            this.attending = 0;
+            this.notAttending = 0;
+            this.noResponse = 0;
+            this.adultCount = 0;
+            this.childrenCount = 0;
+            this.toddlerCount = 0;
+            this.infantCount = 0;
 
             this.each(function(person) {
                 if(person.get('type') == "adult" )
