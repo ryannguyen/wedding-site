@@ -38,6 +38,7 @@ app.all('/admin/*', express.basicAuth('ryanandlisa', 'whitecollar'));
 app.get('/admin', invitations.index);
 app.get('/admin/invitations', invitations.index);
 app.get('/api/invitations', invitations.list);
+app.post('/api/invitations', invitations.create);
 app.put('/api/invitations/:id', invitations.update)
 app.delete('/api/invitations/:id', invitations.delete);
 

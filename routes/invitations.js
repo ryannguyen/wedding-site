@@ -36,13 +36,13 @@ exports.delete = function (req, res) {
 
 // var app = {};
 
-// // CREATE INVITATION
-// app.post('/api/invitations', function(req, res) {
-//     var invitation = new Invitation(req.body);
-//     invitation.save(function(err) {
-//       res.send(invitation.toObject());
-//     });
-// });
+// CREATE INVITATION
+exports.create =  function(req, res) {
+    var invitation = new models.Invitation(req.body);
+    invitation.save(function(err) {
+      res.send(invitation.toObject());
+    });
+};
 
 //UPDATE INVITATION
 exports.update = function (req, res) {

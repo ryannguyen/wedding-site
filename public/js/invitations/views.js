@@ -7,7 +7,8 @@ var Wedding = (window.Wedding = window.Wedding || {});
         template: Handlebars.compile($('#app-template').html()),
         events: {
             "click a.invitations":"showInvitations",
-            "click a.people":"showPeople"
+            "click a.people":"showPeople",
+            "click a.new":"showNewInvitation"
         },
         initialize: function() {
             _.bindAll(this, 'resetPeople', 'editInvitation', 'showInvitations');
@@ -45,13 +46,18 @@ var Wedding = (window.Wedding = window.Wedding || {});
             this.$('#content').html(view.render().el);
         },
         showInvitations: function() {
-            var view = new App.InvitationsView({ collection: this.invitations })
+            var view = new App.InvitationsView({ collection: this.invitations });
             this.$('#content').html(view.render().el);
         },
         showPeople: function() {
-            var view = new App.PeopleView({ collection: this.people })
+            var view = new App.PeopleView({ collection: this.people });
+            this.$('#content').html(view.render().el);
+        },
+        showNewInvitation: function() {
+            var view = new App.NewInvitationView({collection: this.invitations});
             this.$('#content').html(view.render().el);
         }
+
     });
 
     App.InvitationsView = Backbone.View.extend({
@@ -177,7 +183,8 @@ var Wedding = (window.Wedding = window.Wedding || {});
             this.model = new App.Invitation();
         },
         render: function() {
-            this.$el.html(this.template());
+            this.$el.html(this.template(this.model.attributes));
+            this.$(".header").html("New Invitation");
             return this;
         },
         hide: function() {
