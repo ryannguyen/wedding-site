@@ -35,7 +35,9 @@ app.configure('development', function(){
 app.all('/admin/*', express.basicAuth('ryanandlisa', 'whitecollar'));
 
 // redirect to items if you go to index
-app.get('/admin', invitations.index);
+app.get('/admin', function(req, res, next){
+  res.redirect('/admin/invitations');
+});
 app.get('/admin/invitations', invitations.index);
 app.get('/api/invitations', invitations.list);
 app.post('/api/invitations', invitations.create);
