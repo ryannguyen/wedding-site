@@ -11,35 +11,23 @@ var Wedding = (window.Wedding = window.Wedding || {});
             side: ''
         },
         initialize: function(attr, options) {
+            _.bindAll(this, 'updateID');
             attr = attr || {};
-
-            if(attr.people) {
-                this.people = new App.People(attr.people);
-            } else {
-                this.people = new App.People;
-            }
-
             if(!attr.modified_date)
                 this.set('modified_date', null);
 
             if(attr._id) {
                 this.set('id', attr._id);
+            } else {
+                this.on("change:_id", this.updateID);
+                this.generatePassword();
             }
-        },
-        _setPeople: function() {
-            var people = [];
-            this.people.each(function(person) {
-                var attr = person.attributes;
-                if(attr.invitation)
-                    delete attr.invitation
-                people.push(attr);
-            });
 
-
-            this.set('people', people);
-            return this;
         },
-        _generatePassword: function() {
+        updateID: function() {
+            this.id = this.get("_id");
+        },
+        generatePassword: function() {
             if(this.get('password')) return;
 
             var text = "";
@@ -53,19 +41,45 @@ var Wedding = (window.Wedding = window.Wedding || {});
             this.set('password', text)
             return this;
         },
-        prep: function() {
-            this._setPeople()._generatePassword();
-            return this;
-        },
         clear: function() {
             Backbone.Model.prototype.clear.apply(this, arguments);
             this.people.reset(null);
         },
         hasResponded: function() {
-            return !!this.people.find(function(p){ return p.get('response') });
+            return !!_.find(this.get('people'), function(p){ return p.response });
         }
 
     });
 
-    App.Person = Backbone.Model.extend({});
+    App.Person = Backbone.Model.extend({
+        initialize: function() {
+            _.bindAll(this, 'update', 'removeFromCollection');
+
+            if(this.get('invitation')) {
+                this.invitation = window.App.invitations.get(this.get('invitation'));
+                this.invitation.on('change:people', this.update);
+                this.invitation.on('destroy', this.removeFromCollection);
+            }
+        },
+        removeFromCollection: function() {
+            if(this.collection)
+                this.collection.remove(this);
+        },
+        update: function() {
+            var shouldDelete = true;
+            var _this = this;
+
+            _.each(this.invitation.get('people'), function(p) {
+                if(p.name == _this.get('name')) {
+                    shouldDelete = false;
+
+                    _this.set(p);
+                }
+            });
+
+            if(shouldDelete && this.collection) {
+                this.collection.remove(this);
+            }
+        }
+    });
 })(Wedding);

@@ -22,6 +22,14 @@ var Wedding = (window.Wedding = window.Wedding || {});
         childrenCount: 0,
         toddlerCount: 0,
         infantCount: 0,
+        ryanAll: 0,
+        ryanAttending: 0,
+        ryanNotAttending: 0,
+        ryanNoResponse: 0,
+        lisaAll: 0,
+        lisaAttending: 0,
+        lisaNotAttending: 0,
+        lisaNoResponse: 0,
         comparator: function(model) {
             return model.get('name').toLowerCase();
         },
@@ -48,17 +56,35 @@ var Wedding = (window.Wedding = window.Wedding || {});
                 if(person.get('type') == "infant" || person.get('type') == "Infant")
                     return;
 
-                switch(person.get('response')) {
-                    case 'y':
-                        _this.attending = _this.attending + 1;
-                        break;
-                    case 'n':
-                        _this.notAttending = _this.notAttending + 1;
-                        break;
-                    default:
-                        _this.noResponse = _this.noResponse + 1;
-                };
+                var response = person.get('response');
+                var invitation = window.App.invitations.get(person.get('invitation'));
 
+                if( response === 'y') {
+                    _this.attending = _this.attending + 1;
+
+                    if(invitation.get('side') == "ryan") {
+                        _this.ryanAttending = _this.ryanAttending + 1;
+                    } else {
+                        _this.lisaAttending = _this.lisaAttending + 1;
+                    }
+                } else if (response === 'n') {
+                    _this.notAttending = _this.notAttending + 1;
+
+                    if(invitation.get('side') == "ryan") {
+                        _this.ryanNotAttending = _this.ryanNotAttending + 1;
+                    } else {
+                        _this.lisaNotAttending = _this.lisaNotAttending + 1;
+                    }
+
+                } else {
+                    _this.noResponse = _this.noResponse + 1;
+
+                    if(invitation.get('side') == "ryan") {
+                        _this.ryanNoResponse = _this.ryanNoResponse + 1;
+                    } else {
+                        _this.lisaNoResponse = _this.lisaNoResponse + 1;
+                    }
+                }
             });
         },
         getCount: function() {
@@ -70,7 +96,15 @@ var Wedding = (window.Wedding = window.Wedding || {});
                 adultCount: this.adultCount,
                 childrenCount: this.childrenCount,
                 toddlerCount: this.toddlerCount,
-                infantCount: this.infantCount
+                infantCount: this.infantCount,
+                ryanAll: this.ryanNoResponse + this.ryanNotAttending + this.ryanAttending,
+                ryanNoResponse: this.ryanNoResponse,
+                ryanNotAttending: this.ryanNotAttending,
+                ryanAttending: this.ryanAttending,
+                lisaAll: this.lisaNoResponse + this.lisaNotAttending + this.lisaAttending,
+                lisaNoResponse: this.lisaNoResponse,
+                lisaNotAttending: this.lisaNotAttending,
+                lisaAttending: this.lisaAttending
             }
         }
 
