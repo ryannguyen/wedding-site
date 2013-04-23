@@ -116,7 +116,13 @@ app.get('/status_board', function(req, res) {
         res.render('status_board_table.html', {
             attendingCount: attendingCount,
             notAttendingCount: notAttendingCount,
-            noResponseCount: noResponseCount
+            noResponseCount: noResponseCount,
+            ryanAttendingCount: ryanAttendingCount,
+            ryanNotAttendingCount: ryanNotAttendingCount,
+            ryanNoResponseCount: ryanNoResponseCount,
+            lisaAttendingCount: lisaAttendingCount,
+            lisaNotAttendingCount: lisaNotAttendingCount,
+            lisaNoResponseCount: lisaNoResponseCount
         });
     });
 });
