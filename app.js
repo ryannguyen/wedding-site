@@ -62,11 +62,62 @@ app.post('/rsvp', function(req, res) {
 
 // Status Board
 app.get('/status_board', function(req, res) {
-  models.Invitation
-    .find()
-    .sort('label')
-    .exec(function(err, results) {
-        res.render('status_board_table.html');
+    var attendingCount = 0
+      , notAttendingCount = 0
+      , noResponseCount = 0;
+
+    var lisaAttendingCount = 0
+      , lisaNotAttendingCount = 0
+      , lisaNoResponseCount = 0;
+
+    var ryanAttendingCount = 0
+      , ryanNotAttendingCount = 0
+      , ryanNoResponseCount = 0;
+
+    models.Invitation
+        .find()
+        .sort('label')
+        .exec(function(err, results) {
+            var people = [];
+            results.forEach(function(invitation) {
+                invitation.people.forEach(function(person) {
+                    var response = person.response;
+
+                    if( response === 'y') {
+                        attendingCount = attendingCount + 1;
+
+                    if(invitation.side == "ryan") {
+                        ryanAttendingCount = ryanAttendingCount + 1;
+                    } else {
+                        lisaAttendingCount = lisaAttendingCount + 1;
+                    }
+                } else if (response === 'n') {
+                    notAttendingCount = notAttendingCount + 1;
+
+                    if(invitation.side == "ryan") {
+                        ryanNotAttendingCount = ryanNotAttendingCount + 1;
+                    } else {
+                        lisaNotAttendingCount = lisaNotAttendingCount + 1;
+                    }
+
+                } else {
+                    noResponseCount = noResponseCount + 1;
+
+                    if(invitation.get('side') == "ryan") {
+                        ryanNoResponseCount = ryanNoResponseCount  + 1;
+                    } else {
+                        lisaNoResponseCount = lisaNoResponseCount + 1;
+                    }
+                }
+
+                });
+            });
+
+        res.render('status_board_table.html', {
+            attendingCount: attendingCount,
+            notAttendingCount: notAttendingCount,
+            noResponseCount: noResponseCount
+        });
     });
 });
 
