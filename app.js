@@ -60,6 +60,16 @@ app.post('/rsvp', function(req, res) {
   })
 });
 
+// Status Board
+app.get('/status_board', function(req, res) {
+  models.Invitation
+    .find()
+    .sort('label')
+    .exec(function(err, results) {
+        res.render('status_board_table.html');
+    });
+});
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
