@@ -83,6 +83,9 @@ app.get('/status_board', function(req, res) {
                 invitation.people.forEach(function(person) {
                     var response = person.response;
 
+                    if(person.type == "infant" || person.type == "Infant")
+                        return;
+
                     if( response === 'y') {
                         attendingCount = attendingCount + 1;
 
